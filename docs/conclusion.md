@@ -57,4 +57,5 @@ shortcuts and tests.
 
 In summary, I hope you've learned a little more about memory and how it works
 over the course of this tutorial, whether or not you choose to implement this
-development technique in production!
+development technique in production! Feel free to contact me or file questions
+on the repository page; I know I'm not the greatest when it comes to explaining stuff.
