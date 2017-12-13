@@ -1,0 +1,43 @@
+site_name: Runtime Compiled C++ in Maya
+site_description: Hot-reloadable code in Maya
+site_author: Siew Yi Liang
+
+theme: material
+
+theme:
+    name: 'material'
+    palette:
+        primary: 'blue'
+        accent: 'deep orange'
+    
+pages:
+    - About: index.md
+    - Getting Started: getting_started.md
+    - Getting Somewhere: getting_somewhere.md
+    - Getting Into It: getting_into_it.md
+    - Demonstration: demo.md
+    - Closing thoughts: conclusion.md
+    - Credits: credits.md
+
+
+repo_name: 'maya_hot_reload_example'
+repo_url: 'https://bitbucket.org/sonictk/maya_hot_reload_example'
+
+
+markdown_extensions:
+    - inline_graphviz
+    - admonition
+    - codehilite:
+    - toc:
+        permalink: true    
+
+edit_uri: ''
+
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/sonictk'
+    - type: 'twitter'
+      link: 'https://twitter.com/ylsiew'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/sonictk'
