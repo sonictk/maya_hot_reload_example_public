@@ -21,7 +21,7 @@ pages:
 
 
 repo_name: 'maya_hot_reload_example'
-repo_url: 'https://bitbucket.org/sonictk/maya_hot_reload_example'
+repo_url: 'https://github.com/sonictk/maya_hot_reload_example_public'
 
 
 markdown_extensions:
