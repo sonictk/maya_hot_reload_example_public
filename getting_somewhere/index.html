@@ -1,0 +1,1085 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Hot-reloadable code in Maya">
+      
+      
+      
+        <meta name="author" content="Siew Yi Liang">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.2">
+    
+    
+      
+        <title>Getting Somewhere - Runtime Compiled C++ in Maya</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.7a4cdee3.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    
+      <body data-md-color-primary="blue" data-md-color-accent="deep-orange">
+    
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="352" height="448" viewBox="0 0 352 448" id="bitbucket"><path fill="currentColor" d="M203.75 214.75q2 15.75-12.625 25.25t-27.875 1.5q-9.75-4.25-13.375-14.5t-.125-20.5 13-14.5q9-4.5 18.125-3t16 8.875 6.875 16.875zm27.75-5.25q-3.5-26.75-28.25-41T154 165.25q-15.75 7-25.125 22.125t-8.625 32.375q1 22.75 19.375 38.75t41.375 14q22.75-2 38-21t12.5-42zM291.25 74q-5-6.75-14-11.125t-14.5-5.5T245 54.25q-72.75-11.75-141.5.5-10.75 1.75-16.5 3t-13.75 5.5T60.75 74q7.5 7 19 11.375t18.375 5.5T120 93.75Q177 101 232 94q15.75-2 22.375-3t18.125-5.375T291.25 74zm14.25 258.75q-2 6.5-3.875 19.125t-3.5 21-7.125 17.5-14.5 14.125q-21.5 12-47.375 17.875t-50.5 5.5-50.375-4.625q-11.5-2-20.375-4.5T88.75 412 70.5 401.125t-13-15.375q-6.25-24-14.25-73l1.5-4 4.5-2.25q55.75 37 126.625 37t126.875-37q5.25 1.5 6 5.75t-1.25 11.25-2 9.25zM350.75 92.5q-6.5 41.75-27.75 163.75-1.25 7.5-6.75 14t-10.875 10T291.75 288q-63 31.5-152.5 22-62-6.75-98.5-34.75-3.75-3-6.375-6.625t-4.25-8.75-2.25-8.5-1.5-9.875T25 232.75q-2.25-12.5-6.625-37.5t-7-40.375T5.5 118 0 78.5Q.75 72 4.375 66.375T12.25 57t11.25-7.5T35 43.875t12-4.625q31.25-11.5 78.25-16 94.75-9.25 169 12.5Q333 47.25 348 66.25q4 5 4.125 12.75t-1.375 13.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Runtime Compiled C++ in Maya" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Runtime Compiled C++ in Maya
+              </span>
+              <span class="md-header-nav__topic">
+                Getting Somewhere
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Runtime Compiled C++ in Maya
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Getting Somewhere
+      </label>
+    
+    <a href="./" title="Getting Somewhere" class="md-nav__link md-nav__link--active">
+      Getting Somewhere
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#making-the-basic-plug-in-setup" title="Making the basic plug-in setup" class="md-nav__link">
+    Making the basic plug-in setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-build-script" title="Writing the build script" class="md-nav__link">
+    Writing the build script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-client-plugin" title="Writing the Client Plugin" class="md-nav__link">
+    Writing the Client Plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name-mangling-visibility" title="Name mangling &amp; visibility" class="md-nav__link">
+    Name mangling &amp; visibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-geometry" title="Simple geometry" class="md-nav__link">
+    Simple geometry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-plugin" title="Building the plugin" class="md-nav__link">
+    Building the plugin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_into_it/" title="Getting Into It" class="md-nav__link">
+      Getting Into It
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../demo/" title="Demonstration" class="md-nav__link">
+      Demonstration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../conclusion/" title="Closing thoughts" class="md-nav__link">
+      Closing thoughts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../credits/" title="Credits" class="md-nav__link">
+      Credits
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#making-the-basic-plug-in-setup" title="Making the basic plug-in setup" class="md-nav__link">
+    Making the basic plug-in setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-build-script" title="Writing the build script" class="md-nav__link">
+    Writing the build script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-client-plugin" title="Writing the Client Plugin" class="md-nav__link">
+    Writing the Client Plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name-mangling-visibility" title="Name mangling &amp; visibility" class="md-nav__link">
+    Name mangling &amp; visibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-geometry" title="Simple geometry" class="md-nav__link">
+    Simple geometry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-plugin" title="Building the plugin" class="md-nav__link">
+    Building the plugin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="getting-somewhere">Getting somewhere<a class="headerlink" href="#getting-somewhere" title="Permanent link">&para;</a></h1>
+<p>Ok, there's been a lot of text and diagrams. How about we finally start writing
+some code?</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Throughout the following code samples, I am purposely <em>not</em> writing
+ready-to-use code; if you want that, go to the Git repository itself and
+look at the source files there. I am abbreviating code here for both
+legibility reasons and also because I would rather you attempt to implement
+the code yourself, rather than cargo-culting it wholesale and learning
+nothing in the process.</p>
+</div>
+<h2 id="making-the-basic-plug-in-setup">Making the basic plug-in setup<a class="headerlink" href="#making-the-basic-plug-in-setup" title="Permanent link">&para;</a></h2>
+<p>Firstly, we'll just get a basic skeleton setup of the plugin going. We
+know we're going to create a deformer plugin here, so that means we're going to
+need a <code>MPxGeometryFilter</code> or <code>MPxDeformerNode</code> type of node. For
+simplicity's sake, we'll go with a <code>MPxGeometryFilter</code>. As a refresher,
+you first need to create a defintion that implements a creator
+function and an initializer function, which we will call <code>creator()</code> and
+<code>initialize()</code> respectively.</p>
+<p>Thus, in <code>deformer.h</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// We&#39;ll use these to help us identify the node later on</span>
+<span class="k">static</span> <span class="k">const</span> <span class="n">MTypeId</span> <span class="n">kHotReloadableDeformerID</span> <span class="o">=</span> <span class="mh">0x0008002E</span><span class="p">;</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kHotReloadableDeformerName</span> <span class="o">=</span> <span class="s">&quot;hotReloadableDeformer&quot;</span><span class="p">;</span>
+
+<span class="c1">// Remember, in C++, a struct is the same thing as a class, except you type fewer</span>
+<span class="c1">// access specifiers!</span>
+<span class="k">struct</span> <span class="nl">HotReloadableDeformer</span> <span class="p">:</span> <span class="n">MPxGeometryFilter</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="n">creator</span><span class="p">();</span>
+
+    <span class="k">static</span> <span class="n">MStatus</span> <span class="nf">initialize</span><span class="p">();</span>
+
+    <span class="n">MStatus</span> <span class="nf">deform</span><span class="p">(</span><span class="n">MDataBlock</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">,</span>
+                   <span class="n">MItGeometry</span> <span class="o">&amp;</span><span class="n">iterator</span><span class="p">,</span>
+                   <span class="k">const</span> <span class="n">MMatrix</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span>
+                   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">multiIndex</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And <code>deformer.cpp</code>, which, for now, looks pretty sparse:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;deformer.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">creator</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">HotReloadableDeformer</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">MStatus</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">MStatus</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">deform</span><span class="p">(</span><span class="n">MDataBlock</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">,</span>
+                                      <span class="n">MItGeometry</span> <span class="o">&amp;</span><span class="n">iter</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="n">MMatrix</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span>
+                                      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">multiIndex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="n">iter</span><span class="p">.</span><span class="n">isDone</span><span class="p">();</span> <span class="n">iter</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+    <span class="p">{</span>
+
+        <span class="n">MPoint</span> <span class="n">curPtPosPt</span> <span class="o">=</span> <span class="n">iter</span><span class="p">.</span><span class="n">position</span><span class="p">();</span>
+        <span class="n">iter</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">curPtPosPt</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Great! We've got our node now, let's write the basic plugin structure to
+register it. In case you needed a refresher:</p>
+<p>In <code>plugin_main.cpp</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;plugin_main.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;maya/MFnPlugin.h&gt;</span><span class="cp"></span>
+
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kAUTHOR</span> <span class="o">=</span> <span class="s">&quot;Me, the author&quot;</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kVERSION</span> <span class="o">=</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kREQUIRED_API_VERSION</span> <span class="o">=</span> <span class="s">&quot;Any&quot;</span><span class="p">;</span>
+
+
+<span class="n">MStatus</span> <span class="nf">initializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">status</span><span class="p">;</span>
+    <span class="n">MFnPlugin</span> <span class="n">plugin</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">kAUTHOR</span><span class="p">,</span> <span class="n">kVERSION</span><span class="p">,</span> <span class="n">kREQUIRED_API_VERSION</span><span class="p">);</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">registerNode</span><span class="p">(</span><span class="n">kHotReloadableDeformerName</span><span class="p">,</span>
+                                 <span class="n">kHotReloadableDeformerID</span><span class="p">,</span>
+                                 <span class="o">&amp;</span><span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">creator</span><span class="p">,</span>
+                                 <span class="o">&amp;</span><span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">initialize</span><span class="p">,</span>
+                                 <span class="n">MPxNode</span><span class="o">::</span><span class="n">kGeometryFilter</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">MStatus</span> <span class="nf">uninitializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MFnPlugin</span> <span class="n">plugin</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+    <span class="n">MStatus</span> <span class="n">status</span><span class="p">;</span>
+
+    <span class="n">status</span> <span class="o">=</span>  <span class="n">plugin</span><span class="p">.</span><span class="n">deregisterNode</span><span class="p">(</span><span class="n">kHotReloadableDeformerID</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In <code>plugin_main.h</code>, I go ahead and setup a <a href="https://stackoverflow.com/questions/543697/include-all-cpp-
+files-into-a-single-compilation-unit">Single Translation Unit (STU)
+Build/Unity build</a> (which is easy, since there's only one
+source file right now):</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;deformer.cpp&quot;</span><span class="cp"></span>
+
+<span class="n">MStatus</span> <span class="nf">initializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">);</span>
+
+<span class="n">MStatus</span> <span class="nf">uninitializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">);</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I will not go into the details regarding a STU build here, but suffice to say
+that I have found them much more beneficial to build times than any other
+compiler feature (LTO, IncrediBuild, splitting the code out into pre-compiled
+libs, whatever). For such a small project, it doesn't matter; you can switch back
+to a more traditional build setup if you prefer.</p>
+</div>
+<h2 id="writing-the-build-script">Writing the build script<a class="headerlink" href="#writing-the-build-script" title="Permanent link">&para;</a></h2>
+<p>For building this plugin, I'm going to go off-the-rails from what I usually do
+in my other tutorials and use a <code>build.bat</code> file. Yes, you read that right,
+we're <em>not</em> using CMake for once!</p>
+<p>...That comes later. For now, I'd like us to focus on <em>what's actually
+happening</em>, rather than dealing with both that <em>and</em> the frustration of trying
+to get CMake to do what we want. (And it's good practice to be able to write in
+the scripting language of the OS that you actually use! Trust me, if not for the
+Visual Studio project generation feature of CMake, I'd be using batch scripts on
+Windows anyway.)</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>For Linux/OSX users, you should (hopefully) be familiar enough with Bash
+scripting and GCC/Clang to write the equivalent commands as needed. If not,
+please try to follow along for now or refer to the <code>CMakeLists.txt</code> in the
+repository and convert that to your own build script as needed later on.</p>
+</div>
+<p>What does this mean exactly? Well, we'll need to create a <code>build.bat</code> file,
+for one thing. If you're used to building from within the Visual Studio IDE
+itself instead of from the command line, let's start from the very beginning
+here and work our way through it step-by-step:</p>
+<div class="codehilite"><pre><span></span><span class="p">@</span><span class="k">echo</span> off
+<span class="c1">REM    Set up the Visual Studio environment variables for calling the MSVC compiler</span>
+<span class="k">call</span> <span class="s2">&quot;</span><span class="nv">%vs2017installdir%</span><span class="s2">\VC\Auxiliary\Build\vcvarsall.bat&quot;</span> x64
+
+<span class="c1">REM    Or maybe you&#39;re on VS 2015? Call this instead:</span>
+<span class="c1">REM call &quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat&quot; x64</span>
+
+<span class="c1">REM    Make a build directory to store artifacts; remember, %~dp0 is just a special</span>
+<span class="c1">REM    FOR variable reference in Windows that specifies the current directory the</span>
+<span class="c1">REM    batch script is being run in</span>
+<span class="k">if</span> <span class="k">not</span> <span class="k">exist</span> <span class="nv">%~dp0</span>msbuild <span class="k">mkdir</span> <span class="nv">%~dp0</span>msbuild
+<span class="k">pushd</span> <span class="nv">%~dp0</span>msbuild
+
+<span class="c1">REM    Obviously, change these to point to the proper locations for your filesystem</span>
+<span class="k">set</span> <span class="nv">MayaRootDir</span><span class="p">=</span>C:\Program Files\Autodesk\Maya2016
+<span class="k">set</span> <span class="nv">MayaIncludeDir</span><span class="p">=</span><span class="nv">%MayaRootDir%</span>\include
+
+<span class="k">set</span> <span class="nv">HostEntryPoint</span><span class="p">=</span><span class="nv">%~dp0</span>src\plugin_main.cpp
+
+<span class="k">set</span> <span class="nv">OutputHostMLLFilename</span><span class="p">=</span><span class="nv">%BuildDir%</span>\maya_hot_reload_example.mll
+</pre></div>
+
+
+<p>So far, so good: we first set up the Visual Studio environment by calling a
+convenience batch script (which will allow us to call <code>cl.exe</code> and
+<code>link.exe</code> from the command line directly, which are the MSVC compiler and
+linker respectively), basically create a <code>msbuild</code> directory if it doesn't
+exist, and set some basic constants up.</p>
+<p>Let's add a bit of code just to check if the user typed <code>debug</code> or <code>release</code>
+on the command line, so that we can build different configurations of the plugin
+as needed.</p>
+<div class="codehilite"><pre><span></span><span class="c1">REM Process command line arguments</span>
+<span class="k">set</span> <span class="nv">BuildType</span><span class="p">=</span><span class="nv">%1</span>
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%BuildType%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;&quot;</span> <span class="p">(</span><span class="k">set</span> <span class="nv">BuildType</span><span class="p">=</span>release<span class="p">)</span>
+</pre></div>
+
+
+<p><em>Now</em> it gets a little gnarly:</p>
+<div class="codehilite"><pre><span></span><span class="c1">REM    Setup all the compiler flags</span>
+<span class="k">set</span> <span class="nv">CommonCompilerFlags</span><span class="p">=</span>/c /MP /W3 /WX- /Gy /Zc:wchar_t /Zc:forScope /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /fp:precise /nologo /EHsc /MD /D REQUIRE_IOSTREAM /D _CRT_SECURE_NO_WARNINGS /D _BOOL /D NT_PLUGIN /D _WINDLL /D _MBCS /Gm- /GS /Gy /Gd /TP
+
+<span class="c1">REM    Add the include directories for header files</span>
+<span class="k">set</span> <span class="nv">CommonCompilerFlags</span><span class="p">=</span><span class="nv">%CommonCompilerFlags%</span> /I<span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\include&quot;</span>
+
+<span class="k">set</span> <span class="nv">CommonCompilerFlagsDebug</span><span class="p">=</span>/Zi /Od <span class="nv">%CommonCompilerFlags%</span>
+<span class="k">set</span> <span class="nv">CommonCompilerFlagsRelease</span><span class="p">=</span>/O2 <span class="nv">%CommonCompilerFlags%</span>
+
+<span class="k">set</span> <span class="nv">CompilerFlagsHostDebug</span><span class="p">=</span><span class="nv">%CommonCompilerFlagsDebug%</span> <span class="nv">%HostEntryPoint%</span>
+<span class="k">set</span> <span class="nv">CompilerFlagsHostRelease</span><span class="p">=</span><span class="nv">%CommonCompilerFlagsRelease%</span> <span class="nv">%HostEntryPoint%</span>
+</pre></div>
+
+
+<p><em>Holy compiler flags Batman</em>, what is that wall of options? Basically, you can
+<a href="https://msdn.microsoft.com/en-us/library/fwkeyyhe.aspx">take a look yourself</a>,
+but it's essentially the options we need to build a Maya plugin DLL. The
+important option (well, all of them are <em>technically</em> important) is the <code>/I</code>
+include directory option, which tells the compiler where to look for our <code>.h</code>
+header files during compilation; we set that to the Maya headers include
+directory.</p>
+<p>We also specify two different sets of compilation flags, one for <strong>Release</strong>
+builds, and one for <strong>Debug</strong> builds, which both specify different optimization
+options (the debug build will generate debugging information in the binary).</p>
+<p>Hopefully that made sense, because the flags for the linker aren't any less complicated:</p>
+<div class="codehilite"><pre><span></span><span class="c1">REM    Setup all the linker flags</span>
+<span class="k">set</span> <span class="nv">CommonLinkerFlags</span><span class="p">=</span> /NOLOGO /INCREMENTAL:no /OPT:REF /MANIFEST /MANIFESTUAC:<span class="s2">&quot;level=&#39;asInvoker&#39; uiAccess=&#39;false&#39;&quot;</span> /manifest:embed /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X64  /machine:x64 /DLL
+
+<span class="c1">REM    Add all the Maya libraries to link against</span>
+<span class="k">set</span> <span class="nv">CommonLinkerFlags</span><span class="p">=</span><span class="nv">%CommonLinkerFlags%</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMaya.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaAnim.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaFX.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaRender.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaUI.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\Foundation.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\clew.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMaya.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\Image.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\Foundation.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\IMFbase.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMaya.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaAnim.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaFX.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaRender.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\OpenMayaUI.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\clew.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\Image.lib&quot;</span> <span class="s2">&quot;</span><span class="nv">%MayaRootDir%</span><span class="s2">\lib\IMFbase.lib&quot;</span>
+
+<span class="c1">REM    Now add the OS libraries to link against</span>
+<span class="k">set</span> <span class="nv">CommonLinkerFlags</span><span class="p">=</span><span class="nv">%CommonLinkerFlags%</span> Shlwapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+
+<span class="k">set</span> <span class="nv">CommonLinkerFlagsDebug</span><span class="p">=</span><span class="nv">%CommonLinkerFlags%</span> /DEBUG
+<span class="k">set</span> <span class="nv">CommonLinkerFlagsRelease</span><span class="p">=</span><span class="nv">%CommonLinkerFlags%</span>
+
+<span class="k">set</span> <span class="nv">CommonLinkerFlagsHost</span><span class="p">=</span>/PDB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\maya_hot_reload_example.pdb&quot;</span> /IMPLIB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\maya_hot_reload_example.lib&quot;</span> /export:initializePlugin /export:uninitializePlugin <span class="nv">%BuildDir%</span>\plugin_main.obj /OUT:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\maya_hot_reload_example.mll&quot;</span>
+
+<span class="k">set</span> <span class="nv">LinkerFlagsHostRelease</span><span class="p">=</span><span class="nv">%CommonLinkerFlagsRelease%</span> <span class="nv">%CommonLinkerFlagsHost%</span>
+<span class="k">set</span> <span class="nv">LinkerFlagsHostDebug</span><span class="p">=</span><span class="nv">%CommonLinkerFlagsDebug%</span> <span class="nv">%CommonLinkerFlagsHost%</span>
+</pre></div>
+
+
+<p>Again, MSDN is your friend to
+<a href="https://docs.microsoft.com/en-us/cpp/build/reference/linker-options">find out what all those options do</a>.</p>
+<p>It's not that terribly complicated when we break it down a little: we bascially
+link against all the static Maya libraries that we're supposed to (in order to
+be able to call Maya functions in our DLL), along with the Windows static
+libraries as well (in order to call Windows functions as well). We tell the
+linker that we're building a DLL by specifying the <code>/DLL</code> flag, say that we
+would like the linker to do some basic optimization through the <code>/OPT:REF</code>
+flag, and tell it to write the <strong>Program Database (PDB)</strong> file out, along with
+specifying the <strong>Import Library</strong> (i.e. <code>*.lib</code> file)and output DLL names
+explicitly. If you're familiar with building a Maya plugin, you'll also notice
+the infamous <code>initializePlugin</code> and <code>uninitializePlugin</code> symbols being
+exported as well in the flags; these symbols <em>must</em> be made visible in the DLL
+so that Maya can call the functions to load/unload the plugin respectively.</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>The
+<a href="https://support.microsoft.com/en-us/help/121366/description-of-the--pdb-files-and-of-the--dbg-files">Program Database (PDB)</a>
+file is a Windows-specific file that is used by Visual Studio to look up
+information during a debugging session, such as the location of the source
+files, the positions within the source files that symbols correspond to, and
+other project information as well. They are the most commonly-used debug
+format on Windows these days. Linux/OSX do not have this concept; the
+debugging information is "baked" into the compiled binaries themselves.</p>
+</div>
+<p>We're not done yet; we need to actually compile and link <em>something</em>!</p>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%BuildType%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;debug&quot;</span> <span class="p">(</span>
+    <span class="k">echo</span> Building in debug mode...
+    <span class="k">set</span> <span class="nv">CompilerFlagsHost</span><span class="p">=</span><span class="nv">%CompilerFlagsHostDebug%</span>
+    <span class="k">set</span> <span class="nv">LinkerFlagsHost</span><span class="p">=</span><span class="nv">%LinkerFlagsHostDebug%</span>
+
+    <span class="k">set</span> <span class="nv">CompilerFlagsLogic</span><span class="p">=</span><span class="nv">%CompilerFlagsLogicDebug%</span>
+    <span class="k">set</span> <span class="nv">LinkerFlagsLogic</span><span class="p">=</span><span class="nv">%LinkerFlagsLogicDebug%</span>
+<span class="p">)</span> <span class="k">else</span> <span class="p">(</span>
+    <span class="k">echo</span> Building in release mode...
+    <span class="k">set</span> <span class="nv">CompilerFlagsHost</span><span class="p">=</span><span class="nv">%CompilerFlagsHostRelease%</span>
+    <span class="k">set</span> <span class="nv">LinkerFlagsHost</span><span class="p">=</span><span class="nv">%LinkerFlagsHostRelease%</span>
+
+    <span class="k">set</span> <span class="nv">CompilerFlagsLogic</span><span class="p">=</span><span class="nv">%CompilerFlagsLogicRelease%</span>
+    <span class="k">set</span> <span class="nv">LinkerFlagsLogic</span><span class="p">=</span><span class="nv">%LinkerFlagsLogicRelease%</span>
+<span class="p">)</span>
+
+<span class="k">echo</span> Compiling Host...
+cl <span class="nv">%CompilerFlagsHost%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+
+<span class="k">echo</span> Linking Host...
+link <span class="nv">%LinkerFlagsHost%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+
+
+<span class="k">echo</span> Compiling Logic...
+cl <span class="nv">%CompilerFlagsLogic%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+
+<span class="k">echo</span> Linking Logic...
+link <span class="nv">%LinkerFlagsLogic%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+
+<span class="k">echo</span> Build complete!
+<span class="k">popd</span>
+</pre></div>
+
+
+<p>Luckily, that's a <em>lot</em> easier once all the flags are set up. Whew!</p>
+<p>If you got past all that and got a plugin building, great! We have a node that
+does...well, <em>nothing</em>.</p>
+<p>Now we just need to make it work.</p>
+<h2 id="writing-the-client-plugin">Writing the Client Plugin<a class="headerlink" href="#writing-the-client-plugin" title="Permanent link">&para;</a></h2>
+<p>We know from the previous section (and my fancy graphs)that we need a second DLL
+to handle the <strong>business logic</strong> of the deformation. This client DLL will be
+reloaded by the <strong>Host DLL</strong> every time the timestamp on it changes, and the
+<strong>function pointers</strong> fixed up every time this happens. For simplicity's sake,
+let's assume that all the business logic we'll be dealing with is just a
+function that takes a point from the <code>deform()</code> function, does some work on
+it, and returns us a new position for it to be set at.</p>
+<p>Let's start with the first part of that sentence: making a second <strong>client
+DLL</strong>.</p>
+<h3 id="name-mangling-visibility">Name mangling &amp; visibility<a class="headerlink" href="#name-mangling-visibility" title="Permanent link">&para;</a></h3>
+<p>In <code>logic.h</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#ifdef __cplusplus</span>
+
+<span class="cp">#define Shared extern &quot;C&quot;</span>
+<span class="cp">#define Import extern &quot;C&quot;</span>
+
+<span class="cp">#endif </span><span class="c1">// __cplusplus</span>
+
+
+<span class="c1">/// DLL machinery types</span>
+<span class="cp">#ifdef _WIN32</span>
+<span class="cp">#include</span> <span class="cpf">&lt;Windows.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define DLLExport __declspec(dllexport)</span>
+<span class="cp">#define DLLImport __declspec(dllimport)</span>
+
+<span class="k">typedef</span> <span class="n">HMODULE</span> <span class="n">DLLHandle</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">FARPROC</span> <span class="n">FuncPtr</span><span class="p">;</span>
+
+<span class="cp">#elif __linux__ || __APPLE__</span>
+
+<span class="c1">// NOTE: (sonictk) This will only work on GCC/Clang</span>
+<span class="cp">#define DLLExport __attribute__ ((visibility (&quot;default&quot;)))</span>
+<span class="cp">#define DLLImport __attribute__ ((visibility (&quot;default&quot;)))</span>
+
+<span class="k">typedef</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">DLLHandle</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">FuncPtr</span><span class="p">;</span>
+
+<span class="cp">#endif </span><span class="cm">/* Platform layer for DLL machinery */</span><span class="cp"></span>
+
+
+<span class="n">Shared</span>
+<span class="p">{</span>
+    <span class="n">DLLExport</span> <span class="n">MVector</span> <span class="n">getValue</span><span class="p">(</span><span class="n">MVector</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Ok, what did we just add? Let's go over it bit-by-bit:</p>
+<p><code>extern "C"</code> is basically a <strong>storage class specifier</strong> that denotes <em>external
+language linkage</em>. We <code>#define</code> the keyword <code>Shared</code> to basically say that
+"anytime we use the <code>Shared</code> keyword, it means that we want the following
+symbols that follow it to have external linkage, to be <em>shared</em>". We give it
+<code>C</code> linkage, to avoid our symbol names getting <strong>mangled</strong> by the compiler; we
+do want to be able to call them later on without having to type weird names like
+<code>_ZN9getValue76E</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Name mangling</p>
+<p>If you're new to C++, you might not be familiar with this term. Basically,
+because C++ supports <strong>overloading</strong>, the compiler <em>mangles</em> symbol names
+based on their signatures to ensure that each overload ends up having a
+unique name, so that the compiler can mix and match the correct function
+calls as needed based on the input arguments. More information on this
+feature is available <a href="http://www.geeksforgeeks.org/extern-c-in-c/">here</a>.</p>
+<p>This also means that we should <em>not</em> define overloaded versions of our
+business logic functions, as the compiler won't know which version to use at
+link time (This is also <em>undefined behaviour</em>, which means anything could happen!)</p>
+</div>
+<p>Of course, this is C++, so things aren't as simple as that. We also define the
+<code>DLLExport</code> alias to do something called <code>__declspec(dllexport)</code>, which
+basically is a directive to the MSVC compiler that tells it to export the given
+symbols which use it. This will make the symbols available to the interrogating
+process that loads the DLL. (More information
+<a href="https://docs.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport">here</a>)</p>
+<p>We also make two <code>typedef</code>s: one for DLL handles, and one for function
+pointers. These will use Windows-specific types, which are defined in <code>Windows.h</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>On Linux, we use the <code>visibility</code> <code>__attribute__</code> directive instead,
+which GCC/Clang supports to achieve similar functionality. File handles and
+function pointers on Unix-based OSes are, thankfully, defined to use the
+basic <code>void</code> pointer. It's of note here that by default, unless we
+specifically strip the symbols ourselves, <strong>all symbols are available to an
+interrogating process by default on Linux.</strong> The reason we still make use of
+the visibility features is just in case we ever do decide to strip the
+symbol information in the compilation process, the directive will continue
+to make sure it remains visible in the output binary.</p>
+<p>More information on symbol visibility in GCC is available <a href="https://gcc.gnu.org/wiki/Visibility">here</a>.</p>
+</div>
+<p>We're basically doing the same thing as we did above when specifying
+<code>initializePlugin</code> and <code>uninitializePlugin</code> to be exported symbols, except
+that we're doing it through code instead of the command line.</p>
+<h3 id="simple-geometry">Simple geometry<a class="headerlink" href="#simple-geometry" title="Permanent link">&para;</a></h3>
+<p>Let's go ahead and implement <code>getValue</code> in <code>logic.cpp</code> now:</p>
+<div class="codehilite"><pre><span></span><span class="n">MVector</span> <span class="nf">lerp</span><span class="p">(</span><span class="n">MVector</span> <span class="o">&amp;</span><span class="n">v1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">t</span><span class="p">,</span> <span class="n">MVector</span> <span class="o">&amp;</span><span class="n">v2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MVector</span> <span class="n">result</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">v1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">v2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Shared</span>
+<span class="p">{</span>
+    <span class="n">DLLExport</span> <span class="n">MVector</span> <span class="n">getValue</span><span class="p">(</span><span class="n">MVector</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">MVector</span> <span class="n">result</span><span class="p">;</span>
+
+        <span class="n">result</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">z</span> <span class="o">*</span> <span class="mi">15</span><span class="p">;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">lerp</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>As we can see, it's pretty basic. Our business logic function essentially
+<em>linearly interpolates</em> between a vector, and a non-uniformly scaled version of
+itself based on a normalized<code>factor</code> value. As it happens, the default <code>envelope</code>
+attribute on a Maya deformer is perfect for acting as the input to this
+<code>factor</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">MStatus</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">result</span><span class="p">;</span>
+    <span class="n">attributeAffects</span><span class="p">(</span><span class="n">envelope</span><span class="p">,</span> <span class="n">outputGeom</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MStatus</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">deform</span><span class="p">(</span><span class="n">MDataBlock</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">,</span>
+                                      <span class="n">MItGeometry</span> <span class="o">&amp;</span><span class="n">iter</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="n">MMatrix</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span>
+                                      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">multiIndex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">result</span><span class="p">;</span>
+
+    <span class="n">MDataHandle</span> <span class="n">envelopeHandle</span> <span class="o">=</span> <span class="n">block</span><span class="p">.</span><span class="n">inputValue</span><span class="p">(</span><span class="n">envelope</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+    <span class="kt">float</span> <span class="n">envelope</span> <span class="o">=</span> <span class="n">envelopeHandle</span><span class="p">.</span><span class="n">asFloat</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="n">iter</span><span class="p">.</span><span class="n">isDone</span><span class="p">();</span> <span class="n">iter</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+    <span class="p">{</span>
+
+        <span class="n">MPoint</span> <span class="n">curPtPosPt</span> <span class="o">=</span> <span class="n">iter</span><span class="p">.</span><span class="n">position</span><span class="p">();</span>
+        <span class="c1">// Hmm...but how do we access getValue()?</span>
+        <span class="c1">// MVector finalPosPt = getValue(MVector(curPtPosPt), envelope);</span>
+        <span class="n">MPoint</span> <span class="n">finalPosPt</span> <span class="o">=</span> <span class="n">MPoint</span><span class="p">(</span><span class="n">finalPos</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">finalPos</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">finalPos</span><span class="p">.</span><span class="n">z</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">iter</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">finalPosPt</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We basically tell Maya that the <code>envelope</code> attribute is going to end up
+affecting the geometry, and then...we realize that we can't actually call
+<code>getValue()</code>, yet; at least, not without compiling both <code>logic.cpp</code> and
+<code>plugin_main.cpp</code> within the same <strong>Translation Unit (TU)</strong> so that we have
+access to that symbol. So how are we going to do this?</p>
+<h3 id="building-the-plugin">Building the plugin<a class="headerlink" href="#building-the-plugin" title="Permanent link">&para;</a></h3>
+<p>Let's worry about that later. For now, let's focus on compiling that
+<code>logic.cpp</code> file we just wrote into its own DLL:</p>
+<div class="codehilite"><pre><span></span><span class="c1">REM    Previous stuff...</span>
+
+<span class="k">set</span> <span class="nv">LogicEntryPoint</span><span class="p">=</span><span class="nv">%~dp0</span>src\logic.cpp
+
+<span class="k">set</span> <span class="nv">OutputLogicDLLFilename</span><span class="p">=</span><span class="nv">%BuildDir%</span>\logic.dll
+
+<span class="c1">REM    Previous stuff...</span>
+
+<span class="k">set</span> <span class="nv">CommonLinkerFlagsLogic</span><span class="p">=</span>/PDB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic.pdb&quot;</span> /IMPLIB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic.lib&quot;</span> /OUT:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic.dll&quot;</span> <span class="nv">%BuildDir%</span>\logic.obj
+
+<span class="c1">REM    Previous stuff...</span>
+
+<span class="k">set</span> <span class="nv">LinkerFlagsLogicRelease</span><span class="p">=</span><span class="nv">%CommonLinkerFlagsRelease%</span> <span class="nv">%CommonLinkerFlagsLogic%</span>
+<span class="k">set</span> <span class="nv">LinkerFlagsLogicDebug</span><span class="p">=</span><span class="nv">%CommonLinkerFlagsDebug%</span> <span class="nv">%CommonLinkerFlagsLogic%</span>
+
+<span class="c1">REM   Previous stuff...</span>
+
+<span class="k">echo</span> Compiling Logic...
+cl <span class="nv">%CompilerFlagsLogic%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+
+<span class="k">echo</span> Linking Logic...
+link <span class="nv">%LinkerFlagsLogic%</span>
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">neq</span> 0 <span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+</pre></div>
+
+
+<p>Go ahead and run <code>build.bat debug</code>. Hopefully, you should get the following
+files in your <code>msbuild</code> folder:</p>
+<div class="codehilite"><pre><span></span>logic.dll
+logic.exp
+logic.lib
+logic.obj
+maya_hot_reload_example.exp
+maya_hot_reload_example.lib
+maya_hot_reload_example.mll
+plugin_main.obj
+</pre></div>
+
+
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>The <code>.exp</code> file is known as an <strong>exports</strong> file, and the <code>.lib</code> file is
+an <strong>import library</strong>. They are mainly used to resolve <em>circular exports</em>,
+where a program exports to another program that it also imports from, or
+when more than two programs both import/export to each other; the linker
+needs to know to resolve the dependencies at link-time. They contain
+information about exported functions and other constant data (such as global
+variables). For our purposes, they are largely superfluous, but it is
+important to know about them when dealing with larger, more complicated
+setups.</p>
+<p>Again, Linux/OSX SOs do not have this sort of machinery; it is Windows-specific.</p>
+<p>More information is available <a href="https://msdn.microsoft.com/en-us/library/kkt2hd12.aspx?f=255&amp;MSPPError=-2147217396">here.</a></p>
+</div>
+<p>Try loading the plugin into Maya and applying it to a deformer:</p>
+<div class="codehilite"><pre><span></span><span class="nt">file</span> <span class="nt">-f</span> <span class="nt">-new</span><span class="o">;</span>
+
+<span class="nt">loadPlugin</span> <span class="s2">&quot;c:/Users/sonictk/Git/experiments/maya_hot_reload_example/msbuild/maya_hot_reload_example.dll&quot;</span><span class="o">;</span>
+
+<span class="nt">polySphere</span><span class="o">;</span>
+<span class="nt">deformer</span> <span class="nt">-type</span> <span class="s2">&quot;hotReloadableDeformer&quot;</span><span class="o">;</span>
+</pre></div>
+
+
+<p>If you've made it to this point, great! Let's move on to the next section, where
+we'll start figuring out how to get access to that <code>getValue</code> function from
+our main <code>deformer.cpp</code> TU.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../getting_started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Getting Started
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../getting_into_it/" title="Getting Into It" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting Into It
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/sonictk" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/ylsiew" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/sonictk" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.6cdc17f0.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

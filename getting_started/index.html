@@ -1,0 +1,1109 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Hot-reloadable code in Maya">
+      
+      
+      
+        <meta name="author" content="Siew Yi Liang">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.2">
+    
+    
+      
+        <title>Getting Started - Runtime Compiled C++ in Maya</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.7a4cdee3.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    
+      <body data-md-color-primary="blue" data-md-color-accent="deep-orange">
+    
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="352" height="448" viewBox="0 0 352 448" id="bitbucket"><path fill="currentColor" d="M203.75 214.75q2 15.75-12.625 25.25t-27.875 1.5q-9.75-4.25-13.375-14.5t-.125-20.5 13-14.5q9-4.5 18.125-3t16 8.875 6.875 16.875zm27.75-5.25q-3.5-26.75-28.25-41T154 165.25q-15.75 7-25.125 22.125t-8.625 32.375q1 22.75 19.375 38.75t41.375 14q22.75-2 38-21t12.5-42zM291.25 74q-5-6.75-14-11.125t-14.5-5.5T245 54.25q-72.75-11.75-141.5.5-10.75 1.75-16.5 3t-13.75 5.5T60.75 74q7.5 7 19 11.375t18.375 5.5T120 93.75Q177 101 232 94q15.75-2 22.375-3t18.125-5.375T291.25 74zm14.25 258.75q-2 6.5-3.875 19.125t-3.5 21-7.125 17.5-14.5 14.125q-21.5 12-47.375 17.875t-50.5 5.5-50.375-4.625q-11.5-2-20.375-4.5T88.75 412 70.5 401.125t-13-15.375q-6.25-24-14.25-73l1.5-4 4.5-2.25q55.75 37 126.625 37t126.875-37q5.25 1.5 6 5.75t-1.25 11.25-2 9.25zM350.75 92.5q-6.5 41.75-27.75 163.75-1.25 7.5-6.75 14t-10.875 10T291.75 288q-63 31.5-152.5 22-62-6.75-98.5-34.75-3.75-3-6.375-6.625t-4.25-8.75-2.25-8.5-1.5-9.875T25 232.75q-2.25-12.5-6.625-37.5t-7-40.375T5.5 118 0 78.5Q.75 72 4.375 66.375T12.25 57t11.25-7.5T35 43.875t12-4.625q31.25-11.5 78.25-16 94.75-9.25 169 12.5Q333 47.25 348 66.25q4 5 4.125 12.75t-1.375 13.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Runtime Compiled C++ in Maya" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Runtime Compiled C++ in Maya
+              </span>
+              <span class="md-header-nav__topic">
+                Getting Started
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Runtime Compiled C++ in Maya
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Getting Started
+      </label>
+    
+    <a href="./" title="Getting Started" class="md-nav__link md-nav__link--active">
+      Getting Started
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-we-even-doing" title="What are we even doing?" class="md-nav__link">
+    What are we even doing?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-how-libraries-work" title="Understanding how libraries work" class="md-nav__link">
+    Understanding how libraries work
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-executable" title="Understanding the executable" class="md-nav__link">
+    Understanding the executable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-library" title="Understanding the library" class="md-nav__link">
+    Understanding the library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-all-comes-together" title="How it all comes together" class="md-nav__link">
+    How it all comes together
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_somewhere/" title="Getting Somewhere" class="md-nav__link">
+      Getting Somewhere
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_into_it/" title="Getting Into It" class="md-nav__link">
+      Getting Into It
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../demo/" title="Demonstration" class="md-nav__link">
+      Demonstration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../conclusion/" title="Closing thoughts" class="md-nav__link">
+      Closing thoughts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../credits/" title="Credits" class="md-nav__link">
+      Credits
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-we-even-doing" title="What are we even doing?" class="md-nav__link">
+    What are we even doing?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-how-libraries-work" title="Understanding how libraries work" class="md-nav__link">
+    Understanding how libraries work
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-executable" title="Understanding the executable" class="md-nav__link">
+    Understanding the executable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-library" title="Understanding the library" class="md-nav__link">
+    Understanding the library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-all-comes-together" title="How it all comes together" class="md-nav__link">
+    How it all comes together
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
+<h2 id="what-are-we-even-doing">What are we even doing?<a class="headerlink" href="#what-are-we-even-doing" title="Permanent link">&para;</a></h2>
+<p>Here's <a href="https://www.youtube.com/watch?v=rFz59Jmgewk">what's going down</a>. The
+normal approach for how a custom node in Maya would work would be something like
+the following (connections that are called once are dashed, and connections that
+are called all the time are solid):</p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: overview Pages: 1 -->
+<svg width="375pt" height="105pt"
+ viewBox="0.00 0.00 375.00 105.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 101)">
+<title>overview</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-101 371,-101 371,4 -4,4"/>
+<!-- Maya -->
+<g id="node1" class="node"><title>Maya</title>
+<polygon fill="none" stroke="black" points="367,-63.5 313,-63.5 313,-27.5 367,-27.5 367,-63.5"/>
+<text text-anchor="middle" x="340" y="-41.8" font-family="Arial" font-size="14.00">Maya</text>
+</g>
+<!-- host -->
+<g id="node2" class="node"><title>host</title>
+<polygon fill="limegreen" stroke="none" points="8.5,-71.5 8.5,-92.5 135.5,-92.5 135.5,-71.5 8.5,-71.5"/>
+<polygon fill="none" stroke="black" points="8.5,-71.5 8.5,-92.5 135.5,-92.5 135.5,-71.5 8.5,-71.5"/>
+<text text-anchor="start" x="21" y="-79.3" font-family="Arial" font-weight="bold" font-size="14.00">Plugin DLL/SO</text>
+<polygon fill="none" stroke="black" points="8.5,-54.5 8.5,-71.5 135.5,-71.5 135.5,-54.5 8.5,-54.5"/>
+<text text-anchor="start" x="17.5" y="-60.5" font-family="Courier,monospace" font-size="10.00">initializePlugin()</text>
+<polygon fill="none" stroke="black" points="8.5,-37.5 8.5,-54.5 135.5,-54.5 135.5,-37.5 8.5,-37.5"/>
+<text text-anchor="start" x="11.5" y="-43.5" font-family="Courier,monospace" font-size="10.00">uninitializePlugin()</text>
+<polygon fill="none" stroke="black" points="8.5,-20.5 8.5,-37.5 135.5,-37.5 135.5,-20.5 8.5,-20.5"/>
+<text text-anchor="start" x="47.5" y="-26.5" font-family="Courier,monospace" font-size="10.00">deform()</text>
+<polygon fill="none" stroke="black" points="8.5,-3.5 8.5,-20.5 135.5,-20.5 135.5,-3.5 8.5,-3.5"/>
+<text text-anchor="start" x="62.5" y="-9.5" font-family="Courier,monospace" font-size="10.00">...</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge1" class="edge"><title>host:ip&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M136.5,-63.5C206.995,-63.5 225.318,-68.1771 295,-57.5 297.534,-57.1117 300.131,-56.6298 302.734,-56.084"/>
+<polygon fill="black" stroke="black" points="303.762,-59.4373 312.686,-53.726 302.148,-52.6258 303.762,-59.4373"/>
+<text text-anchor="middle" x="228" y="-67.5" font-family="Arial" font-size="10.00">Called when plugin is loaded</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge2" class="edge"><title>host:up&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M136.5,-45.5C147.398,-45.5 150.104,-44.7223 161,-44.5 220.543,-43.2853 235.448,-43.8234 295,-44.5 297.54,-44.5289 300.163,-44.5671 302.804,-44.6118"/>
+<polygon fill="black" stroke="black" points="302.877,-48.1138 312.943,-44.8099 303.014,-41.1151 302.877,-48.1138"/>
+<text text-anchor="middle" x="228" y="-47.5" font-family="Arial" font-size="10.00">Called when plugin is unloaded</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge3" class="edge"><title>host:d&#45;&gt;Maya</title>
+<path fill="none" stroke="black" d="M136.5,-28.5C149.041,-28.5 148.879,-17.7189 161,-14.5 218.56,0.786001 238.227,3.49118 295,-14.5 300.345,-16.1937 305.601,-18.7964 310.517,-21.7889"/>
+<polygon fill="black" stroke="black" points="308.698,-24.7841 318.943,-27.4843 312.618,-18.9846 308.698,-24.7841"/>
+<text text-anchor="middle" x="228" y="-17.5" font-family="Arial" font-size="10.00">Called when node is dirtied</text>
+</g>
+</g>
+</svg>
+
+<p>It's pretty straightforward; the plugin <strong>Dynamic-link library (Windows/OSX) or
+Shared Object (Linux)</strong> contains all the initialization/uninitialization/deformation
+logic/whatever necessary for the plugin to function; Maya just loads the entire binary,
+calls the functions as needed whenever it determines it should, and that's the
+end of the story.</p>
+<p>What we're going to be doing instead is something like the following:</p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: overview Pages: 1 -->
+<svg width="604pt" height="105pt"
+ viewBox="0.00 0.00 604.00 104.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100.5)">
+<title>overview</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-100.5 600,-100.5 600,4 -4,4"/>
+<!-- Maya -->
+<g id="node1" class="node"><title>Maya</title>
+<polygon fill="none" stroke="black" points="596,-63.5 542,-63.5 542,-27.5 596,-27.5 596,-63.5"/>
+<text text-anchor="middle" x="569" y="-41.8" font-family="Arial" font-size="14.00">Maya</text>
+</g>
+<!-- host -->
+<g id="node2" class="node"><title>host</title>
+<polygon fill="limegreen" stroke="none" points="289.5,-71.5 289.5,-92.5 416.5,-92.5 416.5,-71.5 289.5,-71.5"/>
+<polygon fill="none" stroke="black" points="289.5,-71.5 289.5,-92.5 416.5,-92.5 416.5,-71.5 289.5,-71.5"/>
+<text text-anchor="start" x="313" y="-79.3" font-family="Arial" font-weight="bold" font-size="14.00">Host Plugin</text>
+<polygon fill="none" stroke="black" points="289.5,-54.5 289.5,-71.5 416.5,-71.5 416.5,-54.5 289.5,-54.5"/>
+<text text-anchor="start" x="298.5" y="-60.5" font-family="Courier,monospace" font-size="10.00">initializePlugin()</text>
+<polygon fill="none" stroke="black" points="289.5,-37.5 289.5,-54.5 416.5,-54.5 416.5,-37.5 289.5,-37.5"/>
+<text text-anchor="start" x="292.5" y="-43.5" font-family="Courier,monospace" font-size="10.00">uninitializePlugin()</text>
+<polygon fill="none" stroke="black" points="289.5,-20.5 289.5,-37.5 416.5,-37.5 416.5,-20.5 289.5,-20.5"/>
+<text text-anchor="start" x="328.5" y="-26.5" font-family="Courier,monospace" font-size="10.00">deform()</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge1" class="edge"><title>host:ip&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M417.5,-63.5C464.908,-63.5 477.207,-65.1122 524,-57.5 526.53,-57.0884 529.124,-56.589 531.725,-56.0305"/>
+<polygon fill="black" stroke="black" points="532.765,-59.3805 541.673,-53.6451 531.133,-52.5735 532.765,-59.3805"/>
+<text text-anchor="middle" x="483" y="-66.5" font-family="Arial" font-size="10.00">Called on load</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge2" class="edge"><title>host:up&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M417.5,-45.5C428.398,-45.5 431.104,-44.7223 442,-44.5 478.437,-43.7567 487.558,-44.0859 524,-44.5 526.54,-44.5289 529.163,-44.5671 531.804,-44.6118"/>
+<polygon fill="black" stroke="black" points="531.877,-48.1138 541.943,-44.8099 532.014,-41.1151 531.877,-48.1138"/>
+<text text-anchor="middle" x="483" y="-47.5" font-family="Arial" font-size="10.00">Called on unload</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge3" class="edge"><title>host:d&#45;&gt;Maya</title>
+<path fill="none" stroke="black" d="M417.5,-28.5C430.041,-28.5 429.879,-17.7189 442,-14.5 477.224,-5.14588 489.258,-3.49047 524,-14.5 529.345,-16.1937 534.601,-18.7964 539.517,-21.7889"/>
+<polygon fill="black" stroke="black" points="537.698,-24.7841 547.943,-27.4843 541.618,-18.9846 537.698,-24.7841"/>
+<text text-anchor="middle" x="483" y="-17.5" font-family="Arial" font-size="10.00">Called when dirtied</text>
+</g>
+<!-- client -->
+<g id="node3" class="node"><title>client</title>
+<polygon fill="yellow" stroke="none" points="8,-37.5 8,-58.5 102,-58.5 102,-37.5 8,-37.5"/>
+<polygon fill="none" stroke="black" points="8,-37.5 8,-58.5 102,-58.5 102,-37.5 8,-37.5"/>
+<text text-anchor="start" x="11" y="-45.3" font-family="Arial" font-weight="bold" font-size="14.00">Client Plugin</text>
+<polygon fill="none" stroke="black" points="8,-20.5 8,-37.5 102,-37.5 102,-20.5 8,-20.5"/>
+<text text-anchor="start" x="33.5" y="-26.5" font-family="Courier,monospace" font-size="10.00">logic()</text>
+<polygon fill="none" stroke="black" points="8,-3.5 8,-20.5 102,-20.5 102,-3.5 8,-3.5"/>
+<text text-anchor="start" x="45.5" y="-9.5" font-family="Courier,monospace" font-size="10.00">...</text>
+</g>
+<!-- client&#45;&gt;host -->
+<g id="edge4" class="edge"><title>client:l&#45;&gt;host:d</title>
+<path fill="none" stroke="black" d="M103,-28.5C181.902,-28.5 204.17,-28.5 278.205,-28.5"/>
+<polygon fill="black" stroke="black" points="278.5,-32.0001 288.5,-28.5 278.5,-25.0001 278.5,-32.0001"/>
+<text text-anchor="middle" x="195.5" y="-31.5" font-family="Arial" font-size="10.00">Check last modified timestamp</text>
+</g>
+</g>
+</svg>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the above didn't make any sense, please take a moment to review
+the
+<a href="http://help.autodesk.com/view/MAYAUL/2017/ENU/?guid=__files_Command_plugins_initializePlugin_htm">Autodesk documentation</a>
+regarding how Maya plugins and their entry points work.</p>
+</div>
+<p>In this scenario, the <code>logic()</code> function will now contain all the <strong>business
+logic</strong> necessary for the <code>deform()</code> function to work; the <code>deform()</code>
+function itself will become pretty much nothing but a wrapper around Maya's
+machinery. (For simplicity's sake, I will not be discussing taking the
+<code>deform()</code> function out of the host plugin as well in this tutorial, though it
+is certainly possible, and I encourage you to try!)</p>
+<p>OK, so far it's just a level of abstraction that we've introduced here. What
+happens when we re-compile the client plugin?</p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: overview Pages: 1 -->
+<svg width="648pt" height="334pt"
+ viewBox="0.00 0.00 648.00 334.49" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.839378 0.839378) rotate(0) translate(4 394.5)">
+<title>overview</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-394.5 768,-394.5 768,4 -4,4"/>
+<!-- Maya -->
+<g id="node1" class="node"><title>Maya</title>
+<polygon fill="none" stroke="black" points="365.5,-368.5 311.5,-368.5 311.5,-332.5 365.5,-332.5 365.5,-368.5"/>
+<text text-anchor="middle" x="338.5" y="-346.8" font-family="Arial" font-size="14.00">Maya</text>
+</g>
+<!-- host -->
+<g id="node2" class="node"><title>host</title>
+<polygon fill="limegreen" stroke="none" points="8.5,-305.5 8.5,-326.5 135.5,-326.5 135.5,-305.5 8.5,-305.5"/>
+<polygon fill="none" stroke="black" points="8.5,-305.5 8.5,-326.5 135.5,-326.5 135.5,-305.5 8.5,-305.5"/>
+<text text-anchor="start" x="32" y="-313.3" font-family="Arial" font-weight="bold" font-size="14.00">Host Plugin</text>
+<polygon fill="none" stroke="black" points="8.5,-288.5 8.5,-305.5 135.5,-305.5 135.5,-288.5 8.5,-288.5"/>
+<text text-anchor="start" x="17.5" y="-294.5" font-family="Courier,monospace" font-size="10.00">initializePlugin()</text>
+<polygon fill="none" stroke="black" points="8.5,-271.5 8.5,-288.5 135.5,-288.5 135.5,-271.5 8.5,-271.5"/>
+<text text-anchor="start" x="11.5" y="-277.5" font-family="Courier,monospace" font-size="10.00">uninitializePlugin()</text>
+<polygon fill="none" stroke="black" points="8.5,-254.5 8.5,-271.5 135.5,-271.5 135.5,-254.5 8.5,-254.5"/>
+<text text-anchor="start" x="47.5" y="-260.5" font-family="Courier,monospace" font-size="10.00">deform()</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge1" class="edge"><title>host:ip&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M136.5,-297.5C167.373,-297.5 135.61,-344.936 161,-362.5 202.504,-391.211 263.444,-378.121 301.77,-365.063"/>
+<polygon fill="black" stroke="black" points="303.236,-368.256 311.473,-361.592 300.879,-361.664 303.236,-368.256"/>
+<text text-anchor="middle" x="202" y="-382.5" font-family="Arial" font-size="10.00">Called on load</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge2" class="edge"><title>host:up&#45;&gt;Maya</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M136.5,-279.5C197.487,-279.5 263.244,-308.919 302.36,-329.883"/>
+<polygon fill="black" stroke="black" points="300.786,-333.011 311.238,-334.743 304.147,-326.871 300.786,-333.011"/>
+<text text-anchor="middle" x="202" y="-303.5" font-family="Arial" font-size="10.00">Called on unload</text>
+</g>
+<!-- host&#45;&gt;Maya -->
+<g id="edge3" class="edge"><title>host:d&#45;&gt;Maya</title>
+<path fill="none" stroke="black" d="M136.5,-262.5C183.835,-262.5 199.001,-244.043 243,-261.5 274.624,-274.047 301.812,-302.745 318.799,-324.182"/>
+<polygon fill="black" stroke="black" points="316.148,-326.477 325.011,-332.281 321.702,-322.216 316.148,-326.477"/>
+<text text-anchor="middle" x="202" y="-264.5" font-family="Arial" font-size="10.00">Called when dirtied</text>
+</g>
+<!-- clientOld -->
+<g id="node3" class="node"><title>clientOld</title>
+<polygon fill="grey" stroke="none" points="273.5,-188.5 273.5,-209.5 404.5,-209.5 404.5,-188.5 273.5,-188.5"/>
+<polygon fill="none" stroke="black" points="273.5,-188.5 273.5,-209.5 404.5,-209.5 404.5,-188.5 273.5,-188.5"/>
+<text text-anchor="start" x="276.5" y="-196.3" font-family="Arial" font-weight="bold" font-size="14.00">Client Plugin (Old)</text>
+<polygon fill="none" stroke="black" points="273.5,-171.5 273.5,-188.5 404.5,-188.5 404.5,-171.5 273.5,-171.5"/>
+<text text-anchor="start" x="317.5" y="-177.5" font-family="Courier,monospace" font-size="10.00">logic()</text>
+<polygon fill="none" stroke="black" points="273.5,-154.5 273.5,-171.5 404.5,-171.5 404.5,-154.5 273.5,-154.5"/>
+<text text-anchor="start" x="329.5" y="-160.5" font-family="Courier,monospace" font-size="10.00">...</text>
+</g>
+<!-- host&#45;&gt;clientOld -->
+<g id="edge4" class="edge"><title>host:d&#45;&gt;clientOld:l</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M136.5,-262.5C156.223,-262.5 145.771,-238.033 161,-225.5 199.643,-193.697 216.592,-181.183 262.293,-179.661"/>
+<polygon fill="red" stroke="red" points="262.556,-183.157 272.5,-179.5 262.446,-176.158 262.556,-183.157"/>
+<text text-anchor="middle" x="202" y="-228.5" font-family="Arial" font-size="10.00" fill="red">1 .Unloads library</text>
+</g>
+<!-- clientNew -->
+<g id="node4" class="node"><title>clientNew</title>
+<polygon fill="yellow" stroke="none" points="620,-37.5 620,-58.5 756,-58.5 756,-37.5 620,-37.5"/>
+<polygon fill="none" stroke="black" points="620,-37.5 620,-58.5 756,-58.5 756,-37.5 620,-37.5"/>
+<text text-anchor="start" x="623" y="-45.3" font-family="Arial" font-weight="bold" font-size="14.00">Client Plugin (New)</text>
+<polygon fill="none" stroke="black" points="620,-20.5 620,-37.5 756,-37.5 756,-20.5 620,-20.5"/>
+<text text-anchor="start" x="666.5" y="-26.5" font-family="Courier,monospace" font-size="10.00">logic()</text>
+<polygon fill="none" stroke="black" points="620,-3.5 620,-20.5 756,-20.5 756,-3.5 620,-3.5"/>
+<text text-anchor="start" x="678.5" y="-9.5" font-family="Courier,monospace" font-size="10.00">...</text>
+</g>
+<!-- clientOld&#45;&gt;clientNew -->
+<g id="edge6" class="edge"><title>clientOld:l&#45;&gt;clientNew:l</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M405.5,-179.5C518.205,-179.5 503.8,-37.5042 608.809,-28.9068"/>
+<polygon fill="black" stroke="black" points="609.148,-32.3961 619,-28.5 608.868,-25.4017 609.148,-32.3961"/>
+<text text-anchor="middle" x="514" y="-178.5" font-family="Arial" font-size="10.00">3. Pointer re&#45;directed to new address</text>
+</g>
+<!-- clientNew&#45;&gt;host -->
+<g id="edge5" class="edge"><title>clientNew&#45;&gt;host:d</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M611.918,-31.6721C524.606,-34.2363 377.572,-45.9645 261,-92.5 210.377,-112.709 191.687,-118.451 161,-163.5 137.774,-197.596 174.08,-251.637 146.616,-261.072"/>
+<polygon fill="black" stroke="black" points="145.913,-257.636 136.5,-262.5 146.891,-264.568 145.913,-257.636"/>
+<text text-anchor="middle" x="338.5" y="-106.5" font-family="Arial" font-size="10.00">2. Loads library with newer modified</text>
+<text text-anchor="middle" x="338.5" y="-95.5" font-family="Arial" font-size="10.00"> &#160;&#160;&#160;timestamp</text>
+</g>
+</g>
+</svg>
+
+<p>This might seem a little confusing, so let's go through step-by-step:</p>
+<ul>
+<li>In the <code>deform()</code> function, we're checking the current modification
+  timestamp of the <strong>client plugin</strong>. If we detect that the current file's
+  timestamp is newer than the current one we have loaded in memory, we <strong>unload
+  the old one</strong> and <strong>load the new one into memory</strong> instead.</li>
+<li>We then <strong>fix up the function pointer</strong> to the old <code>logic()</code> method to
+  point to the address of the new <code>logic()</code> function in memory. If this
+  doesn't make sense, I'll go over it in a bit. Basically, think of it as us
+  telling the host plugin that the old <code>logic()</code> function is no longer valid
+  and that it should be looking at our new one instead that we just modified.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Function Pointers: the short version</p>
+<p>If you're new to C/C++, you might not be familiar with what they are.
+<strong>Function pointers</strong> are basically, as the name implies, <em>pointers to
+functions</em>; they point to addresses of where the start of function calls
+live in memory. They allow us to basically re-direct our code to call newer
+versions of functions that we create on-the-fly as required.</p>
+<p>I recommend <a href="http://www.geeksforgeeks.org/function-pointer-in-c/">getting familar with them</a>
+before continuing with this tutorial, as the concept is integral to this entire
+workflow.</p>
+</div>
+<h2 id="understanding-how-libraries-work">Understanding how libraries work<a class="headerlink" href="#understanding-how-libraries-work" title="Permanent link">&para;</a></h2>
+<p>Before we continue any further, let's take a moment to recap on how libraries
+work in operating systems, especially since there are some important differences
+between how Windows/Linux/OSX handles them.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I am not an expert on how these things work by any stretch of the
+imagination, and I highly encourage you
+to
+<a href="https://en.wikipedia.org/wiki/Dynamic-link_library">read up on the subject</a>
+on your own as well to get a better understanding of the machinery
+involved. I will only cover what I think is important in understanding what
+we'll be attempting to accomplish within the scope of this project.</p>
+</div>
+<h3 id="understanding-the-executable">Understanding the executable<a class="headerlink" href="#understanding-the-executable" title="Permanent link">&para;</a></h3>
+<p>You know what an executable is; it's the thing you basically double-click on in
+your file explorer to run a program. When you do that, the OS basically does
+something similar to the following (this is a grossly over-simplified
+explanation of what is actually happening, but we'll gloss over that for now):</p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: overview Pages: 1 -->
+<svg width="648pt" height="185pt"
+ viewBox="0.00 0.00 648.00 184.88" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.915254 0.915254) rotate(0) translate(4 198)">
+<title>overview</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-198 704,-198 704,4 -4,4"/>
+<!-- exe -->
+<g id="node1" class="node"><title>exe</title>
+<polygon fill="limegreen" stroke="none" points="8,-169 8,-190 148,-190 148,-169 8,-169"/>
+<polygon fill="none" stroke="black" points="8,-169 8,-190 148,-190 148,-169 8,-169"/>
+<text text-anchor="start" x="11" y="-176.8" font-family="Arial" font-weight="bold" font-size="14.00">.exe file (PE format)</text>
+<polygon fill="none" stroke="black" points="8,-152 8,-169 148,-169 148,-152 8,-152"/>
+<text text-anchor="start" x="63" y="-158" font-family="Arial" font-size="10.00">header</text>
+<polygon fill="none" stroke="black" points="8,-135 8,-152 148,-152 148,-135 8,-135"/>
+<text text-anchor="start" x="56.5" y="-141" font-family="Arial" font-size="10.00">intel code</text>
+<polygon fill="none" stroke="black" points="8,-118 8,-135 148,-135 148,-118 8,-118"/>
+<text text-anchor="start" x="55.5" y="-124" font-family="Arial" font-size="10.00">fixup table</text>
+</g>
+<!-- linker -->
+<g id="node4" class="node"><title>linker</title>
+<polygon fill="none" stroke="black" points="364,-89 256,-89 256,-53 364,-53 364,-89"/>
+<text text-anchor="middle" x="310" y="-67.3" font-family="Arial" font-size="14.00">Dynamic linker</text>
+</g>
+<!-- exe&#45;&gt;linker -->
+<g id="edge1" class="edge"><title>exe:f&#45;&gt;linker</title>
+<path fill="none" stroke="green" d="M149,-126C161.735,-126 162.284,-116.99 174,-112 196.972,-102.215 223.055,-93.722 246.129,-87.0433"/>
+<polygon fill="green" stroke="green" points="247.151,-90.3914 255.815,-84.2936 245.239,-83.6574 247.151,-90.3914"/>
+</g>
+<!-- exe&#45;&gt;linker -->
+<g id="edge3" class="edge"><title>exe:i&#45;&gt;linker</title>
+<path fill="none" stroke="red" d="M149,-143C196.89,-143 246.304,-115.844 277.308,-94.8874"/>
+<polygon fill="red" stroke="red" points="279.328,-97.7457 285.548,-89.1686 275.337,-91.995 279.328,-97.7457"/>
+</g>
+<!-- memory -->
+<g id="node2" class="node"><title>memory</title>
+<polygon fill="yellow" stroke="none" points="463.5,-89 463.5,-110 572.5,-110 572.5,-89 463.5,-89"/>
+<polygon fill="none" stroke="black" points="463.5,-89 463.5,-110 572.5,-110 572.5,-89 463.5,-89"/>
+<text text-anchor="start" x="466.5" y="-96.8" font-family="Arial" font-weight="bold" font-size="14.00">Memory (RAM)</text>
+<polygon fill="none" stroke="black" points="463.5,-72 463.5,-89 572.5,-89 572.5,-72 463.5,-72"/>
+<text text-anchor="start" x="496.5" y="-78" font-family="Arial" font-size="10.00">intel code</text>
+<polygon fill="none" stroke="black" points="463.5,-55 463.5,-72 572.5,-72 572.5,-55 463.5,-55"/>
+<text text-anchor="start" x="489" y="-61" font-family="Arial" font-size="10.00">function calls</text>
+</g>
+<!-- execution -->
+<g id="node5" class="node"><title>execution</title>
+<polygon fill="none" stroke="black" points="700,-98 617,-98 617,-62 700,-62 700,-98"/>
+<text text-anchor="middle" x="658.5" y="-76.3" font-family="Arial" font-size="14.00">Code runs</text>
+</g>
+<!-- memory&#45;&gt;execution -->
+<g id="edge6" class="edge"><title>memory:i&#45;&gt;execution</title>
+<path fill="none" stroke="black" d="M573.5,-80C584.22,-80 595.709,-80 606.642,-80"/>
+<polygon fill="black" stroke="black" points="606.911,-83.5001 616.911,-80 606.911,-76.5001 606.911,-83.5001"/>
+</g>
+<!-- windowsCode -->
+<g id="node3" class="node"><title>windowsCode</title>
+<polygon fill="none" stroke="blue" points="133.5,-36 22.5,-36 22.5,-0 133.5,-0 133.5,-36"/>
+<text text-anchor="middle" x="78" y="-14.3" font-family="Arial" font-size="14.00">Windows code</text>
+</g>
+<!-- windowsCode&#45;&gt;linker -->
+<g id="edge5" class="edge"><title>windowsCode&#45;&gt;linker</title>
+<path fill="none" stroke="green" d="M133.756,-8.99943C165.077,-5.96195 204.648,-5.75781 238,-17 255.379,-22.8579 271.872,-34.8514 284.58,-46.0506"/>
+<polygon fill="green" stroke="green" points="282.25,-48.6624 291.978,-52.8591 286.99,-43.5118 282.25,-48.6624"/>
+<text text-anchor="middle" x="206" y="-20" font-family="Arial" font-size="10.00">e.g. WinMain()</text>
+</g>
+<!-- linker&#45;&gt;memory -->
+<g id="edge2" class="edge"><title>linker&#45;&gt;memory:f</title>
+<path fill="none" stroke="green" d="M350.819,-52.9654C360.799,-49.258 371.624,-45.9064 382,-44 406.042,-39.5829 413.798,-36.3065 437,-44 446.223,-47.0582 448.137,-54.8918 453.025,-59.4892"/>
+<polygon fill="green" stroke="green" points="451.907,-62.8074 462.5,-63 454.339,-56.2435 451.907,-62.8074"/>
+<text text-anchor="middle" x="409.5" y="-47" font-family="Arial" font-size="10.00">patches over</text>
+</g>
+<!-- linker&#45;&gt;memory -->
+<g id="edge4" class="edge"><title>linker&#45;&gt;memory:i</title>
+<path fill="none" stroke="red" d="M364.24,-75.7109C390.315,-77.6673 422.478,-79.5704 452.437,-79.9368"/>
+<polygon fill="red" stroke="red" points="452.478,-83.437 462.5,-80 452.522,-76.4372 452.478,-83.437"/>
+</g>
+</g>
+</svg>
+
+<p>The file format on Windows for such file is known as
+the <a href="https://en.wikipedia.org/wiki/Portable_Executable">Portable Executable</a>
+format, which is basically a standard layout for how a binary file should look
+like so that the OS (in this case, Windows) knows how to look inside it and find
+the stuff it needs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>On Linux/OSX, the file format used is known as the <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">Executable and Linkable
+Format (ELF)</a>.
+While not precisely the same as the Windows PE format, for our purposes, we
+can assume that they function in a similar manner.</p>
+</div>
+<p>Your <code>.exe</code> file that you compile contains various <strong>memory segments</strong>. There
+is the <strong>data section</strong>, the <strong>code section</strong>, <strong>stack</strong> and the <strong>fixup table</strong>
+(also known as the <strong>import address table</strong>). In it, there are assembly
+instructions that make up the function calls that you've created in your source
+code. These assembly instructions were generated when you compiled your source
+code by whichever compiler you chose to use.</p>
+<p>When you click on that <code>.exe</code> file, Windows creates a new process for
+you and maps the executable into that process' memory. Permissions are set for
+various sections of the data read in (i.e. the <strong>code section</strong> is set to executable,
+the <strong>data</strong> section is read/write, and the <strong>stack/constants</strong> are
+read-only). It then looks at the <strong>fixup table</strong> that you have in your
+executable to see where your Windows/CRT function calls should be <em>patched over</em>
+in memory to point to the actual address of Windows functions (i.e. <strong>not</strong>
+inside your executable!) So things like <code>strlen()</code>, <code>WinMain()</code> and even
+things like <code>malloc()</code> all get executed this way.</p>
+<h3 id="understanding-the-library">Understanding the library<a class="headerlink" href="#understanding-the-library" title="Permanent link">&para;</a></h3>
+<p>OK, whatever. So what has this got to do with libraries?</p>
+<p>First of all, let's get one thing straight: <strong>a library is, for all intents and
+purposes, exactly the same thing as an executable</strong>. The major difference is
+that the library is not directly executable (as the name implies), and a library
+(usually) doesn't need to define an entry point. Libraries basically contain the
+same things that an executable does; in fact, on Windows, the <strong>Dynamic Link
+Library (DLL)</strong> format (which is known as a <em>shared library</em> format) uses the
+exact same PE format that an <code>.exe</code> file does. The same is true for Linux as well,
+where <strong>Shared Object (SO)</strong> and executables on Linux both share the ELF format.</p>
+<p>One other difference is that typically, on Windows, a shared library <em>exports</em>
+specific symbols for usage outside of itself through something called an
+<a href="https://docs.microsoft.com/en-us/cpp/build/exporting-from-a-dll">export table</a>.
+This exports table is what allows other executables like <code>Maya.exe</code> to be able
+to access the functions such as <code>initializePlugin</code> and <code>uninitalizePlugin</code>
+in your <code>.mll</code> files (If you recall, you have to externalize these functions when
+compiling your Maya plug-in as well!).</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>On Linux/OSX, <strong>all symbols in a <code>.so</code> file are available to an
+interrogating process (i.e. Maya) by default</strong>. This means that we are able
+to lookup such symbols without the need for an export table unless we strip
+out the symbols manually; we'll talk about this later on during
+implementation of our compilation scripts.</p>
+<p>On this point, it's important to note that if it wasn't apparent,
+the <code>.mll</code> and <code>.dll</code> extensions are essentially the same; Maya just
+wants a <code>.mll</code> extension for convention's sake; the file formats are
+identical for both. On Linux, you should be aware that the convention for
+both a Maya plug-in extension and a normal shared library is <code>.so</code>.</p>
+</div>
+<p>There are different types of libraries used for different purposes: <strong>static</strong>
+libraries, which are libraries used during <em>linking</em> and actually combined into
+the final executable, and <strong>dynamic</strong> libraries, which are libraries that, as
+the name implies, <em>dynamically loaded</em> either at <strong>load-time</strong> or <strong>run-time</strong>
+rather than actually being combined into the main executable file.</p>
+<p>We'll be focusing on dynamic link libraries in this tutorial, since they give us the
+properties we'll need for code hotloading. If you'd like to learn more about the
+differences between the two and what they're each used for, I recommend <a href="http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html">reading
+up</a> on
+the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms681938(v=vs.85).aspx">subject</a>.</p>
+<p>In addition to dynamic linking, there are two ways to perform this as well, known as
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684184(v=vs.85).aspx">load-time</a>
+dynamic linking, and
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms685090%28v=vs.85%29.aspx?f=255&amp;MSPPError=-2147217396">run-time</a>
+dynamic linking. For our purposes, we will be using <strong>run-time</strong> dynamic
+linking, which basically means that we will manage loading the DLL ourselves at
+<em>run-time</em>, reading that DLL's available symbols, and mapping <strong>function pointers</strong>
+to point to those symbols.</p>
+<h2 id="how-it-all-comes-together">How it all comes together<a class="headerlink" href="#how-it-all-comes-together" title="Permanent link">&para;</a></h2>
+<p>So when all is said and done, here's what things look like when we introduce a
+DLL to the mix:</p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: overview Pages: 1 -->
+<svg width="661pt" height="498pt"
+ viewBox="0.00 0.00 661.19 498.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 494)">
+<title>overview</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-494 657.188,-494 657.188,4 -4,4"/>
+<!-- exe -->
+<g id="node1" class="node"><title>exe</title>
+<polygon fill="limegreen" stroke="none" points="129.188,-321 129.188,-342 307.188,-342 307.188,-321 129.188,-321"/>
+<polygon fill="none" stroke="black" points="129.188,-321 129.188,-342 307.188,-342 307.188,-321 129.188,-321"/>
+<text text-anchor="start" x="132.188" y="-328.8" font-family="Arial" font-weight="bold" font-size="14.00">Maya.exe file (PE format)</text>
+<polygon fill="none" stroke="black" points="129.188,-304 129.188,-321 307.188,-321 307.188,-304 129.188,-304"/>
+<text text-anchor="start" x="203.188" y="-310" font-family="Arial" font-size="10.00">header</text>
+<polygon fill="none" stroke="black" points="129.188,-287 129.188,-304 307.188,-304 307.188,-287 129.188,-287"/>
+<text text-anchor="start" x="196.688" y="-293" font-family="Arial" font-size="10.00">intel code</text>
+<polygon fill="none" stroke="black" points="129.188,-270 129.188,-287 307.188,-287 307.188,-270 129.188,-270"/>
+<text text-anchor="start" x="195.688" y="-276" font-family="Arial" font-size="10.00">fixup table</text>
+</g>
+<!-- linker -->
+<g id="node5" class="node"><title>linker</title>
+<polygon fill="none" stroke="black" points="422.188,-219 314.188,-219 314.188,-183 422.188,-183 422.188,-219"/>
+<text text-anchor="middle" x="368.188" y="-197.3" font-family="Arial" font-size="14.00">Dynamic linker</text>
+</g>
+<!-- exe&#45;&gt;linker -->
+<g id="edge1" class="edge"><title>exe:f:e&#45;&gt;linker</title>
+<path fill="none" stroke="green" d="M308.188,-278C327.592,-278 311.753,-252.676 323.188,-237 326.098,-233.012 329.581,-229.249 333.305,-225.776"/>
+<polygon fill="green" stroke="green" points="335.834,-228.22 341.179,-219.072 331.296,-222.89 335.834,-228.22"/>
+</g>
+<!-- exe&#45;&gt;linker -->
+<g id="edge6" class="edge"><title>exe:i:e&#45;&gt;linker</title>
+<path fill="none" stroke="red" d="M308.188,-295C324.173,-295 344.725,-255.716 357.155,-228.211"/>
+<polygon fill="red" stroke="red" points="360.359,-229.62 361.192,-219.058 353.954,-226.795 360.359,-229.62"/>
+</g>
+<!-- dll -->
+<g id="node2" class="node"><title>dll</title>
+<polygon fill="limegreen" stroke="none" points="203.188,-464.5 203.188,-485.5 347.188,-485.5 347.188,-464.5 203.188,-464.5"/>
+<polygon fill="none" stroke="black" points="203.188,-464.5 203.188,-485.5 347.188,-485.5 347.188,-464.5 203.188,-464.5"/>
+<text text-anchor="start" x="206.188" y="-472.3" font-family="Arial" font-weight="bold" font-size="14.00">.DLL file (PE format)</text>
+<polygon fill="none" stroke="black" points="203.188,-447.5 203.188,-464.5 347.188,-464.5 347.188,-447.5 203.188,-447.5"/>
+<text text-anchor="start" x="260.188" y="-453.5" font-family="Arial" font-size="10.00">header</text>
+<polygon fill="none" stroke="black" points="203.188,-430.5 203.188,-447.5 347.188,-447.5 347.188,-430.5 203.188,-430.5"/>
+<text text-anchor="start" x="253.688" y="-436.5" font-family="Arial" font-size="10.00">intel code</text>
+<polygon fill="none" stroke="black" points="203.188,-413.5 203.188,-430.5 347.188,-430.5 347.188,-413.5 203.188,-413.5"/>
+<text text-anchor="start" x="252.688" y="-419.5" font-family="Arial" font-size="10.00">fixup table</text>
+<polygon fill="lightblue" stroke="none" points="203.188,-396.5 203.188,-413.5 347.188,-413.5 347.188,-396.5 203.188,-396.5"/>
+<polygon fill="none" stroke="black" points="203.188,-396.5 203.188,-413.5 347.188,-413.5 347.188,-396.5 203.188,-396.5"/>
+<text text-anchor="start" x="246.688" y="-402.5" font-family="Arial" font-size="10.00">exports table</text>
+</g>
+<!-- dll&#45;&gt;exe -->
+<g id="edge2" class="edge"><title>dll&#45;&gt;exe</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M194.936,-431.599C125.24,-422.02 31.9967,-404.106 9.18845,-375 -24.2231,-332.363 43.6922,-316.103 110.829,-310.077"/>
+<polygon fill="black" stroke="black" points="111.469,-313.536 121.149,-309.228 110.895,-306.56 111.469,-313.536"/>
+<text text-anchor="middle" x="101.688" y="-367" font-family="Arial" font-size="10.00"> &#160;&#160;&#160;Tells OS to load the library into memory</text>
+</g>
+<!-- dll&#45;&gt;exe -->
+<g id="edge8" class="edge"><title>dll:et:s&#45;&gt;exe</title>
+<path fill="none" stroke="lightblue" d="M275.188,-395.5C275.188,-368.159 232.975,-397.323 217.188,-375 213.249,-369.43 211.139,-362.91 210.234,-356.153"/>
+<polygon fill="lightblue" stroke="lightblue" points="213.729,-355.963 209.695,-346.166 206.739,-356.34 213.729,-355.963"/>
+<text text-anchor="middle" x="285.688" y="-367" font-family="Arial" font-size="10.00" fill="blue"> &#160;&#160;&#160;reads addresses of functions</text>
+</g>
+<!-- dll&#45;&gt;linker -->
+<g id="edge3" class="edge"><title>dll:i&#45;&gt;linker</title>
+<path fill="none" stroke="red" d="M348.188,-438.5C389.781,-438.5 378.212,-291.427 371.462,-229.241"/>
+<polygon fill="red" stroke="red" points="374.907,-228.554 370.31,-219.008 367.95,-229.337 374.907,-228.554"/>
+</g>
+<!-- dll&#45;&gt;linker -->
+<g id="edge4" class="edge"><title>dll:f:e&#45;&gt;linker</title>
+<path fill="none" stroke="green" d="M348.188,-421.5C376.641,-421.5 381.664,-401.434 392.188,-375 414.89,-317.979 406.332,-295.312 387.188,-237 386.227,-234.073 385.025,-231.104 383.695,-228.197"/>
+<polygon fill="green" stroke="green" points="386.798,-226.577 379.148,-219.247 380.557,-229.748 386.798,-226.577"/>
+</g>
+<!-- memory -->
+<g id="node3" class="node"><title>memory</title>
+<polygon fill="yellow" stroke="none" points="313.188,-110.5 313.188,-131.5 422.188,-131.5 422.188,-110.5 313.188,-110.5"/>
+<polygon fill="none" stroke="black" points="313.188,-110.5 313.188,-131.5 422.188,-131.5 422.188,-110.5 313.188,-110.5"/>
+<text text-anchor="start" x="316.188" y="-118.3" font-family="Arial" font-weight="bold" font-size="14.00">Memory (RAM)</text>
+<polygon fill="none" stroke="black" points="313.188,-93.5 313.188,-110.5 422.188,-110.5 422.188,-93.5 313.188,-93.5"/>
+<text text-anchor="start" x="346.188" y="-99.5" font-family="Arial" font-size="10.00">intel code</text>
+<polygon fill="none" stroke="black" points="313.188,-76.5 313.188,-93.5 422.188,-93.5 422.188,-76.5 313.188,-76.5"/>
+<text text-anchor="start" x="338.688" y="-82.5" font-family="Arial" font-size="10.00">function calls</text>
+</g>
+<!-- execution -->
+<g id="node6" class="node"><title>execution</title>
+<polygon fill="none" stroke="black" points="502.188,-36 422.188,-36 422.188,-0 502.188,-0 502.188,-36"/>
+<text text-anchor="middle" x="462.188" y="-14.3" font-family="Arial" font-size="14.00">Maya runs</text>
+</g>
+<!-- memory&#45;&gt;execution -->
+<g id="edge10" class="edge"><title>memory:i:e&#45;&gt;execution:w</title>
+<path fill="none" stroke="black" d="M423.188,-101.5C455.38,-101.5 402.319,-38.7068 411.866,-22.0274"/>
+<polygon fill="black" stroke="black" points="413.396,-25.1788 421.188,-18 410.62,-18.7527 413.396,-25.1788"/>
+</g>
+<!-- windowsCode -->
+<g id="node4" class="node"><title>windowsCode</title>
+<polygon fill="none" stroke="blue" points="545.688,-324 434.688,-324 434.688,-288 545.688,-288 545.688,-324"/>
+<text text-anchor="middle" x="490.188" y="-302.3" font-family="Arial" font-size="14.00">Windows code</text>
+</g>
+<!-- windowsCode&#45;&gt;linker -->
+<g id="edge9" class="edge"><title>windowsCode&#45;&gt;linker</title>
+<path fill="none" stroke="green" d="M474.274,-287.916C460.564,-273.607 439.923,-253.013 420.188,-237 415.142,-232.905 409.62,-228.816 404.12,-224.953"/>
+<polygon fill="green" stroke="green" points="405.794,-221.858 395.564,-219.1 401.842,-227.635 405.794,-221.858"/>
+<text text-anchor="middle" x="543.188" y="-240" font-family="Arial" font-size="10.00" fill="green"> &#160;&#160;&#160;Calls here could be from either the DLL or Maya</text>
+</g>
+<!-- linker&#45;&gt;memory -->
+<g id="edge5" class="edge"><title>linker&#45;&gt;memory:f</title>
+<path fill="none" stroke="green" d="M345.59,-182.822C339.489,-177.525 333.197,-171.392 328.188,-165 319.238,-153.578 316.756,-150.066 313.188,-136 308.748,-118.49 296.439,-96.5481 302.69,-88.0704"/>
+<polygon fill="green" stroke="green" points="304.06,-91.295 312.188,-84.5 301.596,-84.7426 304.06,-91.295"/>
+<text text-anchor="middle" x="361.688" y="-157" font-family="Arial" font-size="10.00" fill="green"> &#160;&#160;&#160;patches over</text>
+</g>
+<!-- linker&#45;&gt;memory -->
+<g id="edge7" class="edge"><title>linker&#45;&gt;memory:i</title>
+<path fill="none" stroke="red" d="M385.563,-182.843C409.647,-158.149 448.583,-114.391 433.273,-103.838"/>
+<polygon fill="red" stroke="red" points="433.721,-100.349 423.188,-101.5 432.14,-107.168 433.721,-100.349"/>
+</g>
+</g>
+</svg>
+
+<p><em>Sorry, GraphViz (which is what I use to generate these diagrams) is a little
+difficult to wrangle into producing a nice shape</em>.</p>
+<p>Basically, we see that things aren't that different; all that really happens is
+that Maya will now load in our <code>.dll</code> library, read the addresses of functions
+from the exports table, presumably do whatever it needs to do (i.e. call
+<code>deform()</code> or <code>compute()</code>, for example), which then in turn the dynamic
+linker will patch over with calls from Windows functions (if they happen to be
+used in those function calls), before finally executing the code from memory and
+thus performing the work we'd like (i.e. the mesh deforms, the animation plays,
+the entire thing crashes etc.)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Casey Muratori did a great job of giving a more Windows-specific generic
+overview of this entire topic on the Handmade Hero stream; I would highly
+recommend watching it as well as he talks about other details that are of
+interest, such as how memory paging works, along with the <strong>Virtual Memory
+Address System (VMAS)</strong>, and the differences between <em>physical</em> and
+<em>virtual</em> memory. There are other things to learn, such as <strong>Address Space
+Layout Randomization</strong> (ASLR), and all the other minutae related to those
+concepts that we won't be covering within the scope of this tutorial.</p>
+<p>The video is available <a href="https://hero.handmade.network/episode/intro-to-c/day5">here</a>.</p>
+</div>
+<p>Hopefully all of the above made some sense! Next, we'll finally get to start
+writing some code to start to get this implemented, and in the process,
+hopefully learn a lot more about how memory works in general!.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="About" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                About
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../getting_somewhere/" title="Getting Somewhere" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting Somewhere
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/sonictk" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/ylsiew" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/sonictk" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.6cdc17f0.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,699 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Hot-reloadable code in Maya">
+      
+      
+      
+        <meta name="author" content="Siew Yi Liang">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="./assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.2">
+    
+    
+      
+        <title>Runtime Compiled C++ in Maya</title>
+      
+    
+    
+      <link rel="stylesheet" href="./assets/stylesheets/application.7a4cdee3.css">
+      
+        <link rel="stylesheet" href="./assets/stylesheets/application-palette.792431c1.css">
+      
+    
+    
+      <script src="./assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    
+      <body data-md-color-primary="blue" data-md-color-accent="deep-orange">
+    
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="352" height="448" viewBox="0 0 352 448" id="bitbucket"><path fill="currentColor" d="M203.75 214.75q2 15.75-12.625 25.25t-27.875 1.5q-9.75-4.25-13.375-14.5t-.125-20.5 13-14.5q9-4.5 18.125-3t16 8.875 6.875 16.875zm27.75-5.25q-3.5-26.75-28.25-41T154 165.25q-15.75 7-25.125 22.125t-8.625 32.375q1 22.75 19.375 38.75t41.375 14q22.75-2 38-21t12.5-42zM291.25 74q-5-6.75-14-11.125t-14.5-5.5T245 54.25q-72.75-11.75-141.5.5-10.75 1.75-16.5 3t-13.75 5.5T60.75 74q7.5 7 19 11.375t18.375 5.5T120 93.75Q177 101 232 94q15.75-2 22.375-3t18.125-5.375T291.25 74zm14.25 258.75q-2 6.5-3.875 19.125t-3.5 21-7.125 17.5-14.5 14.125q-21.5 12-47.375 17.875t-50.5 5.5-50.375-4.625q-11.5-2-20.375-4.5T88.75 412 70.5 401.125t-13-15.375q-6.25-24-14.25-73l1.5-4 4.5-2.25q55.75 37 126.625 37t126.875-37q5.25 1.5 6 5.75t-1.25 11.25-2 9.25zM350.75 92.5q-6.5 41.75-27.75 163.75-1.25 7.5-6.75 14t-10.875 10T291.75 288q-63 31.5-152.5 22-62-6.75-98.5-34.75-3.75-3-6.375-6.625t-4.25-8.75-2.25-8.5-1.5-9.875T25 232.75q-2.25-12.5-6.625-37.5t-7-40.375T5.5 118 0 78.5Q.75 72 4.375 66.375T12.25 57t11.25-7.5T35 43.875t12-4.625q31.25-11.5 78.25-16 94.75-9.25 169 12.5Q333 47.25 348 66.25q4 5 4.125 12.75t-1.375 13.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="." title="Runtime Compiled C++ in Maya" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Runtime Compiled C++ in Maya
+              </span>
+              <span class="md-header-nav__topic">
+                About
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Runtime Compiled C++ in Maya
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        About
+      </label>
+    
+    <a href="." title="About" class="md-nav__link md-nav__link--active">
+      About
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about" title="About" class="md-nav__link">
+    About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-should-i-care" title="Why should I care?" class="md-nav__link">
+    Why should I care?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-use-a-scripting-language" title="Why not use a scripting language?" class="md-nav__link">
+    Why not use a scripting language?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-is-this-going-to-work" title="How is this going to work?" class="md-nav__link">
+    How is this going to work?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" title="Requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-will-need" title="What you will need" class="md-nav__link">
+    What you will need
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-should-know" title="What you should know" class="md-nav__link">
+    What you should know
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="getting_started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="getting_somewhere/" title="Getting Somewhere" class="md-nav__link">
+      Getting Somewhere
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="getting_into_it/" title="Getting Into It" class="md-nav__link">
+      Getting Into It
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="demo/" title="Demonstration" class="md-nav__link">
+      Demonstration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="conclusion/" title="Closing thoughts" class="md-nav__link">
+      Closing thoughts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="credits/" title="Credits" class="md-nav__link">
+      Credits
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about" title="About" class="md-nav__link">
+    About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-should-i-care" title="Why should I care?" class="md-nav__link">
+    Why should I care?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-use-a-scripting-language" title="Why not use a scripting language?" class="md-nav__link">
+    Why not use a scripting language?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-is-this-going-to-work" title="How is this going to work?" class="md-nav__link">
+    How is this going to work?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" title="Requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-will-need" title="What you will need" class="md-nav__link">
+    What you will need
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-you-should-know" title="What you should know" class="md-nav__link">
+    What you should know
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="runtime-compiled-c-in-maya">Runtime Compiled C++ in Maya<a class="headerlink" href="#runtime-compiled-c-in-maya" title="Permanent link">&para;</a></h1>
+<h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
+<p>This is a tutorial on how to setup a workflow for writing C++ code in Maya that
+is <strong>hot-loadable</strong>; which is to say, you can compile your code and watch your
+changes take effect <em>instantly, on-the-fly</em>, without having to unload/reload your
+plugin, or worse, restart Maya.</p>
+<p>All the source code for this example node is available
+<a href="https://bitbucket.org/sonictk/maya_hot_reload_example">here</a>.</p>
+<h2 id="why-should-i-care">Why should I care?<a class="headerlink" href="#why-should-i-care" title="Permanent link">&para;</a></h2>
+<p>Several reasons:</p>
+<ul>
+<li>
+<p><strong>Being able to iterate quickly is a receipe for success</strong>. This applies in many
+  disciplines, but especially so in programming; <em>the faster you see results, the
+  faster you can make decisions about those results and continue with your
+  work.</em> The less time you spend waiting between rebuilds/IDE lag/getting coffee,
+  the more time you spend <em>making decisions about your data</em>.
+  The more decisions you make, the more work you're able to get done.</p>
+</li>
+<li>
+<p><strong>People dislike C/C++ because it is perceived to be "difficult" or "slow to
+  write in".</strong> (In fact, I used to be like this as well when I first started out
+  learning the language.) The alternative (which usually means using a scripting
+  language like Python/MEL/Lua, or using an intermediate runtime solution
+  through LLVM IR like <a href="https://vimeo.com/101975842">Fabric Engine</a>/Maya
+  Bifrost) is actually <em>slower</em> to iterate in when it comes to production use cases.
+  Nevertheless, it must be recognized that when it comes to writing Maya
+  plug-ins, it is, in truth, a very involved process for even an experienced C++
+  programmer to even get a plug-in compiled and working for the first
+  time. <strong>This workflow aims to make that approach faster than any scripting
+  language-based workflow can achieve.</strong></p>
+</li>
+<li>
+<p><strong>You can debug state-based problems much more easily.</strong> For example, let's
+  say you were writing a deformer, and had a bug that only occurred when the
+  input mesh was deformed a certain way, on a specific frame, and perhaps only 1
+  out of 5 times under the right circumstances. Worse, it's a simulation, so
+  your output is not always idempotent (thus making it very difficult to unit
+  test). Conventionally, you would need to unload/reload the plugin, re-setup
+  the mesh in the specific manner that you suspect would trigger the issue and
+  repeat this process ad-infinitum while you maybe had a debugger attached in
+  the hope that you could catch the issue. With the ability to hotload your code
+  on-the-fly, you can <em>see your decision changes immediately as you make changes
+  to the code in context</em>. This makes it incredibly powerful as a debugging
+  tool, since you can now easily narrow down the cause of bugs by changing the
+  code, re-compiling, and watching your deformer <em>update instantly</em>, all without
+  having to re-setup the context (mesh inputs, playback to current frame, etc.).</p>
+</li>
+<li>
+<p><strong>Programming becomes fun again!</strong> Let's face it; the process for getting a
+  Maya plugin working can be infinitely more draining than the process of
+  actually writing the code itself; even without taking the Maya API itself into
+  account with its ideas forced unto you, the build/linking process is incredibly
+  convoluted, the dependencies number in the dozens, and the worst part is that
+  all of it almost always has <em>nothing</em> to do with the actual problem you're
+  trying to solve. If you could reduce the amount of <em>cruft</em> you have to deal
+  with and focus on the <strong>business logic</strong> of the plug-in you're trying to
+  <em>craft</em> instead, wouldn't you prefer that?</p>
+</li>
+</ul>
+<h3 id="why-not-use-a-scripting-language">Why not use a scripting language?<a class="headerlink" href="#why-not-use-a-scripting-language" title="Permanent link">&para;</a></h3>
+<p>With all that being said, a very common solution to the problems above already
+exists, and has for quite some time now: scripting languages. Whether it be
+writing your code in Python/Lua/C#/MEL whatever, what usually happens is that
+these languages have a <strong>interpreter</strong> embedded in the host application, and
+allow you to write some code, perform Just-In-Time (JIT) compilation on it to
+machine code to execute directly.</p>
+<div class="admonition note">
+<p class="admonition-title">What about LLVM Intermediate Runtime (IR)?</p>
+<p>There are solutions that go further by compiling your source code to an
+<a href="https://idea.popcount.org/2013-07-24-ir-is-better-than-assembly/">intermediate runtime</a>
+(the most popular method seems to be using
+the <a href="http://llvm.org/">LLVM toolchain</a> to do so) before allowing the LLVM
+backend to translate it to actual CPU instructions, allowing
+for greater optimization by the compiler, thus resulting in improved performance
+over having an embedded interpreter .</p>
+<p><a href="https://github.com/giordi91/babycpp">Marco Giordano</a> has a great
+simplified example of this running using his own custom compiler for his
+implementation of his C-like scripting language inside Maya. <strong>Fabric Engine</strong>, as
+already mentioned, was taking advantage of this method as well, and the new
+<strong>Bifrost</strong> framework in Maya will also be utilizing this approach.</p>
+</div>
+<p>However, these solutions suffer from the same issue that all scripting languages
+suffer from: they only give you what they've specifically exposed; you rarely
+have full control over the actual memory you're dealing with, and in the case of
+a Maya C++ plugin, you don't have full access to the entire Maya API (even if
+you're using OpenMaya.) As we are <em>programmers</em>, our primary job is first and
+foremost to <strong>deal with memory</strong>. Therefore, the existing solutions are what I
+would consider <em>incomplete</em>, and thus we will not discuss them throughout this
+document.</p>
+<p>That being said, there is a time and place for such scripting languages and
+techniques, and by no means should you view their usage as undesirable.</p>
+<h3 id="how-is-this-going-to-work">How is this going to work?<a class="headerlink" href="#how-is-this-going-to-work" title="Permanent link">&para;</a></h3>
+<p>Basically, the idea is that we will have a single <code>.cpp</code> file, <code>logic.cpp</code>,
+that will act as our <em>entry-point</em> "script" file of sorts; we'll be able to
+continuously edit that file, re-build our plugin, and see our deformer update in
+the Maya viewport.</p>
+<p>We'll have two libraries, one that will be known as the <strong>host library</strong>, and
+the other as the <strong>client library</strong>. The client library will be the one that is
+continuously re-compiled and hot-loaded, while the host library will remain
+(mostly) immutable. Of course, we should be able to add additional <code>.cpp</code> and
+<code>.h</code> files with their own corresponding logic as well and hot-load them as
+necessary, but everything will go through that original <code>logic.cpp</code> file
+first; that's why it's referred to as the <em>entry-point</em> for our <em>business
+logic</em>.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<h3 id="what-you-will-need">What you will need<a class="headerlink" href="#what-you-will-need" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Maya 2016 or higher</strong>. (Really, any modern version of Maya will do.)</li>
+<li>A <strong>C/C++ development environment</strong> set up and ready to go. (If you want to see
+  what my Emacs setup looks like, it's
+  available <a href="https://github.com/sonictk/lightweight-emacs">here</a>.)</li>
+<li>Access to the <a href="https://linux.die.net/man/">Linux manpages</a>/<a href="https://developer.microsoft.com/en-us/windows">Windows MSDN documentation</a>.</li>
+<li>Spare time and an open mind.</li>
+</ul>
+<p>This tutorial will provide instructions for the main supported platforms that
+Maya runs on, namely Windows, Linux and OSX. However, for fairly obvious reasons,
+the tutorial will come from a <em>Windows-first approach</em>. Whenever platform-specific
+information is appropriate, it will appear in the following form:</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>Platform-specific information goes here.</p>
+</div>
+<h3 id="what-you-should-know">What you should know<a class="headerlink" href="#what-you-should-know" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Basic knowledge of C/C++</strong>. I will focus on including only the code that is
+  important; I expect you to be able to understand how to fill in the rest as
+  needed. At the very least, you should be able to compile a Maya plug-in and
+  run it using whatever toolchain you're familar with.</p>
+</li>
+<li>
+<p>Knowledge of how the dependency graph works in Maya and how dirty propagation works.</p>
+</li>
+<li>
+<p><strong>Basic knowledge of how Maya plugins work and how to write/build them</strong>. There is
+  a sample <code>CMakeLists.txt</code> build script provided for reference if you need a
+  refresher on that. You can use whatever build system you want; I just use CMake
+  for convenience's sake.</p>
+</li>
+</ul>
+<p>In the next section, we'll go over a high-level overview of what this tutorial is
+attempting to cover and some basic fundamentals of how memory works.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="getting_started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting Started
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/sonictk" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/ylsiew" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/sonictk" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./assets/javascripts/application.6cdc17f0.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:"."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

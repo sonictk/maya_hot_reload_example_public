@@ -1,0 +1,1337 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Hot-reloadable code in Maya">
+      
+      
+      
+        <meta name="author" content="Siew Yi Liang">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.2">
+    
+    
+      
+        <title>Getting Into It - Runtime Compiled C++ in Maya</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.7a4cdee3.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    
+      <body data-md-color-primary="blue" data-md-color-accent="deep-orange">
+    
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="352" height="448" viewBox="0 0 352 448" id="bitbucket"><path fill="currentColor" d="M203.75 214.75q2 15.75-12.625 25.25t-27.875 1.5q-9.75-4.25-13.375-14.5t-.125-20.5 13-14.5q9-4.5 18.125-3t16 8.875 6.875 16.875zm27.75-5.25q-3.5-26.75-28.25-41T154 165.25q-15.75 7-25.125 22.125t-8.625 32.375q1 22.75 19.375 38.75t41.375 14q22.75-2 38-21t12.5-42zM291.25 74q-5-6.75-14-11.125t-14.5-5.5T245 54.25q-72.75-11.75-141.5.5-10.75 1.75-16.5 3t-13.75 5.5T60.75 74q7.5 7 19 11.375t18.375 5.5T120 93.75Q177 101 232 94q15.75-2 22.375-3t18.125-5.375T291.25 74zm14.25 258.75q-2 6.5-3.875 19.125t-3.5 21-7.125 17.5-14.5 14.125q-21.5 12-47.375 17.875t-50.5 5.5-50.375-4.625q-11.5-2-20.375-4.5T88.75 412 70.5 401.125t-13-15.375q-6.25-24-14.25-73l1.5-4 4.5-2.25q55.75 37 126.625 37t126.875-37q5.25 1.5 6 5.75t-1.25 11.25-2 9.25zM350.75 92.5q-6.5 41.75-27.75 163.75-1.25 7.5-6.75 14t-10.875 10T291.75 288q-63 31.5-152.5 22-62-6.75-98.5-34.75-3.75-3-6.375-6.625t-4.25-8.75-2.25-8.5-1.5-9.875T25 232.75q-2.25-12.5-6.625-37.5t-7-40.375T5.5 118 0 78.5Q.75 72 4.375 66.375T12.25 57t11.25-7.5T35 43.875t12-4.625q31.25-11.5 78.25-16 94.75-9.25 169 12.5Q333 47.25 348 66.25q4 5 4.125 12.75t-1.375 13.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Runtime Compiled C++ in Maya" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Runtime Compiled C++ in Maya
+              </span>
+              <span class="md-header-nav__topic">
+                Getting Into It
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Runtime Compiled C++ in Maya
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://bitbucket.org/sonictk/maya_hot_reload_example" title="Go to repository" class="md-source" data-md-source="bitbucket">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#bitbucket" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      maya_hot_reload_example
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting_somewhere/" title="Getting Somewhere" class="md-nav__link">
+      Getting Somewhere
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Getting Into It
+      </label>
+    
+    <a href="./" title="Getting Into It" class="md-nav__link md-nav__link--active">
+      Getting Into It
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#checking-file-modified-timestamps" title="Checking file modified timestamps" class="md-nav__link">
+    Checking file modified timestamps
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" title="Windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" title="Linux" class="md-nav__link">
+    Linux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-a-shared-library" title="Loading a shared library" class="md-nav__link">
+    Loading a shared library
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows_1" title="Windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux_1" title="Linux" class="md-nav__link">
+    Linux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-things-together" title="Putting things together" class="md-nav__link">
+    Putting things together
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dealing-with-windows" title="Dealing with Windows" class="md-nav__link">
+    Dealing with Windows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dll-file-handle-lock" title="DLL file handle lock" class="md-nav__link">
+    DLL file handle lock
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdb-lock" title="PDB lock" class="md-nav__link">
+    PDB lock
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-it-working" title="Is it working?" class="md-nav__link">
+    Is it working?
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../demo/" title="Demonstration" class="md-nav__link">
+      Demonstration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../conclusion/" title="Closing thoughts" class="md-nav__link">
+      Closing thoughts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../credits/" title="Credits" class="md-nav__link">
+      Credits
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#checking-file-modified-timestamps" title="Checking file modified timestamps" class="md-nav__link">
+    Checking file modified timestamps
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" title="Windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" title="Linux" class="md-nav__link">
+    Linux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-a-shared-library" title="Loading a shared library" class="md-nav__link">
+    Loading a shared library
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows_1" title="Windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux_1" title="Linux" class="md-nav__link">
+    Linux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-things-together" title="Putting things together" class="md-nav__link">
+    Putting things together
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dealing-with-windows" title="Dealing with Windows" class="md-nav__link">
+    Dealing with Windows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dll-file-handle-lock" title="DLL file handle lock" class="md-nav__link">
+    DLL file handle lock
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdb-lock" title="PDB lock" class="md-nav__link">
+    PDB lock
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-it-working" title="Is it working?" class="md-nav__link">
+    Is it working?
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="getting-into-it">Getting into it<a class="headerlink" href="#getting-into-it" title="Permanent link">&para;</a></h1>
+<p>Picking up from the previous chapter, we got both a <code>logic.dll</code> and a
+<code>maya_hot_reload_example.dll</code> compiled and working, and (hopefully) loadable
+by Maya. Great!</p>
+<p>Now let's dive into what else the deformer needs to do:</p>
+<blockquote>
+<p>... we need a second DLL
+to handle the business logic of the deformation. <strong>This client DLL will be
+reloaded by the Host DLL every time the timestamp on it changes</strong>, and the
+function pointers fixed up every time this happens.</p>
+</blockquote>
+<p>OK, let's focus on that next!</p>
+<h2 id="checking-file-modified-timestamps">Checking file modified timestamps<a class="headerlink" href="#checking-file-modified-timestamps" title="Permanent link">&para;</a></h2>
+<p>Rather than write some generic file-timestamp checking functions, let's take a
+more data-oriented approach and <em>write the client code first</em>. What this means
+is basically, "what would the code for such a thing even look like at the end of
+the day?"</p>
+<p>First, we're going to need to load the logic DLL. We're probably going to want
+to do this the moment the plugin is loaded, otherwise we wouldn't be able to do
+anything anyway. The <code>postConstructor()</code> virtual method is one possibility to
+utilize to achieve this goal:</p>
+<div class="codehilite"><pre><span></span><span class="c1">/// This is the global reference to the *business logic* DLL that is loaded.</span>
+<span class="k">static</span> <span class="n">DeformerLogicLibrary</span> <span class="n">kLogicLibrary</span> <span class="o">=</span> <span class="p">{};</span>
+
+
+<span class="kt">void</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">postConstructor</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">LibraryStatus</span> <span class="n">result</span> <span class="o">=</span> <span class="n">loadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">LibraryStatus_Success</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Failed to load shared library!&quot;</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>What is a <code>LibraryStatus</code>? It's nothing more complicated than a status code.</p>
+<div class="codehilite"><pre><span></span><span class="k">enum</span> <span class="n">LibraryStatus</span>
+<span class="p">{</span>
+    <span class="n">LibraryStatus_Failure</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">,</span>
+    <span class="n">LibraryStatus_InvalidLibrary</span><span class="p">,</span>
+    <span class="n">LibraryStatus_InvalidSymbol</span><span class="p">,</span>
+    <span class="n">LibraryStatus_InvalidHandle</span><span class="p">,</span>
+    <span class="n">LibraryStatus_UnloadFailure</span><span class="p">,</span>
+    <span class="n">LibraryStatus_Success</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>And what is a <code>DeformerLogicLibrary</code>? It's a simple creature too:</p>
+<div class="codehilite"><pre><span></span><span class="k">typedef</span> <span class="nf">MVector</span> <span class="p">(</span><span class="o">*</span><span class="n">DeformFunc</span><span class="p">)(</span><span class="n">MVector</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">float</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">DeformerLogicLibrary</span>
+<span class="p">{</span>
+    <span class="n">DLLHandle</span> <span class="n">handle</span><span class="p">;</span>
+    <span class="n">FileTime</span> <span class="n">lastModified</span><span class="p">;</span>
+
+    <span class="n">DeformFunc</span> <span class="n">deformCB</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">isValid</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>As you can see, it's a mere data structure with pointers to the DLL handle, some
+sort of <code>FileTime</code> thing that basically tells us when the DLL was last
+modified (so that we know if we need to reload it), a function pointer to the
+actual deformation business logic, and a boolean we can query to check if the
+data is valid. Note that the signature of the function that the function pointer
+points to matches the <code>getValue</code> function that we previously defined.</p>
+<p>Let's focus now on what <code>loadDeformerLogicDLL</code> will actually do:</p>
+<div class="codehilite"><pre><span></span><span class="n">LibraryStatus</span> <span class="nf">loadDeformerLogicDLL</span><span class="p">(</span><span class="n">DeformerLogicLibrary</span> <span class="o">&amp;</span><span class="n">library</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">libFilenameC</span> <span class="o">=</span> <span class="n">kPluginLogicLibraryPath</span><span class="p">.</span><span class="n">asChar</span><span class="p">();</span>
+
+    <span class="n">FileTime</span> <span class="n">lastModified</span> <span class="o">=</span> <span class="n">getLastWriteTime</span><span class="p">(</span><span class="n">libFilenameC</span><span class="p">);</span>
+    <span class="n">library</span><span class="p">.</span><span class="n">lastModified</span> <span class="o">=</span> <span class="n">lastModified</span><span class="p">;</span>
+
+    <span class="n">DLLHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">loadSharedLibrary</span><span class="p">(</span><span class="n">libFilenameC</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Unable to load logic library!&quot;</span><span class="p">);</span>
+        <span class="n">library</span><span class="p">.</span><span class="n">handle</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">library</span><span class="p">.</span><span class="n">lastModified</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="n">library</span><span class="p">.</span><span class="n">isValid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="n">LibraryStatus_InvalidLibrary</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">library</span><span class="p">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">handle</span><span class="p">;</span>
+
+    <span class="n">FuncPtr</span> <span class="n">getValueFuncAddr</span> <span class="o">=</span> <span class="n">loadSymbolFromLibrary</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="s">&quot;getValue&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">getValueFuncAddr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Could not find symbols in library!&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">LibraryStatus_InvalidSymbol</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">library</span><span class="p">.</span><span class="n">deformCB</span> <span class="o">=</span> <span class="p">(</span><span class="n">DeformFunc</span><span class="p">)</span><span class="n">getValueFuncAddr</span><span class="p">;</span>
+    <span class="n">library</span><span class="p">.</span><span class="n">isValid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayInfo</span><span class="p">(</span><span class="s">&quot;Loaded library from: &quot;</span> <span class="o">+</span> <span class="n">kPluginLogicLibraryPath</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">LibraryStatus_Success</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Ok, a couple of things here: what is <code>kPluginLogicLibraryPath</code>? It's basically
+the path to the logic library, which we'll assume to be in the same plugin as
+the host DLL. Thus, we can retrieve it easily:</p>
+<div class="codehilite"><pre><span></span><span class="n">MString</span> <span class="n">pluginPath</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">loadPath</span><span class="p">();</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pluginPathC</span> <span class="o">=</span> <span class="n">pluginPath</span><span class="p">.</span><span class="n">asChar</span><span class="p">();</span>
+<span class="k">const</span> <span class="n">sizet</span> <span class="n">lenPluginPath</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">pluginPathC</span><span class="p">);</span>
+<span class="kt">char</span> <span class="n">OSPluginPath</span><span class="p">[</span><span class="n">kMaxPathLen</span><span class="p">];</span>
+<span class="n">strncpy</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">,</span> <span class="n">pluginPathC</span><span class="p">,</span> <span class="n">lenPluginPath</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">replaced</span> <span class="o">=</span> <span class="n">convertPathSeparatorsToOSNative</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">replaced</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Failed to format path of plugin to OS native version!&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Could not find a path to the plugin!&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">kPluginLogicLibraryPath</span> <span class="o">=</span> <span class="n">getDeformerLogicLibraryPath</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">);</span>
+</pre></div>
+
+
+<p>The source code for <code>convertPathSeparatorsToOSNative</code> looks roughly like this:</p>
+<div class="codehilite"><pre><span></span><span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">kWin32PathSeparator</span> <span class="o">=</span> <span class="sc">&#39;\\&#39;</span><span class="p">;</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">kPathDelimiter</span> <span class="o">=</span> <span class="sc">&#39;\\&#39;</span><span class="p">;</span>
+
+
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">stringReplace</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">input</span><span class="p">,</span>
+                         <span class="kt">char</span> <span class="o">*</span><span class="n">output</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="kt">char</span> <span class="n">token</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="kt">char</span> <span class="n">replace</span><span class="p">,</span>
+                         <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">sizet</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">replaced</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">token</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">;</span>
+            <span class="n">replaced</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">replaced</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">convertPathSeparatorsToOSNative</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">sizet</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">tmp</span><span class="p">[</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">replaced</span> <span class="o">=</span> <span class="n">stringReplace</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+                                 <span class="n">tmp</span><span class="p">,</span>
+                                 <span class="n">kWin32PathSeparator</span><span class="p">,</span>
+                                 <span class="n">kPathDelimiter</span><span class="p">,</span>
+                                 <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">replaced</span> <span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">replaced</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">strncpy</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">replaced</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And that of <code>getDeformerLogicLibraryPath</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#ifdef _WIN32</span>
+<span class="n">globalVar</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kDeformerLogicLibraryName</span> <span class="o">=</span> <span class="s">&quot;logic.dll&quot;</span><span class="p">;</span>
+
+<span class="cp">#elif __linux__ || __APPLE__</span>
+<span class="n">globalVar</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">kDeformerLogicLibraryName</span> <span class="o">=</span> <span class="s">&quot;logic.so&quot;</span><span class="p">;</span>
+
+<span class="cp">#endif </span><span class="c1">// Library filename</span>
+
+<span class="n">MString</span> <span class="nf">getDeformerLogicLibraryPath</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pluginPath</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">pluginPath</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">MString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="n">pathDelimiter</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">kPathDelimiter</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">};</span>
+    <span class="n">MString</span> <span class="n">delimiter</span><span class="p">(</span><span class="n">pathDelimiter</span><span class="p">);</span>
+    <span class="n">MString</span> <span class="n">pluginPathStr</span><span class="p">(</span><span class="n">pluginPath</span><span class="p">);</span>
+    <span class="n">MString</span> <span class="n">libFilename</span> <span class="o">=</span> <span class="n">pluginPathStr</span> <span class="o">+</span> <span class="n">delimiter</span> <span class="o">+</span> <span class="n">kDeformerLogicLibraryName</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">libFilename</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We basically have a bog-standard character-replacement function (since Maya
+returns paths with Unix path separators by default) that helps us format a
+Windows path to the <code>logic.dll</code> file.</p>
+<p>Now, let's take a look at what <code>getLastWriteTime</code> looks like:</p>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>On Windows, we make use of
+the
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364946%28v=vs.85%29.aspx?f=255&amp;MSPPError=-2147217396"><code>GetFileAttributesEx</code></a>
+call to retrieve the file's attributes, and get the last modified time from there.</p>
+<div class="codehilite"><pre><span></span><span class="k">typedef</span> <span class="n">uint_64t</span> <span class="n">FileTime</span><span class="p">;</span>
+
+
+<span class="kr">inline</span> <span class="n">FileTime</span> <span class="nf">getLastWriteTime</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">FileTime</span> <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">FILETIME</span> <span class="n">lastWriteTime</span><span class="p">;</span>
+    <span class="n">WIN32_FILE_ATTRIBUTE_DATA</span> <span class="n">data</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">GetFileAttributesEx</span><span class="p">((</span><span class="n">LPCTSTR</span><span class="p">)</span><span class="n">filename</span><span class="p">,</span> <span class="n">GetFileExInfoStandard</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">lastWriteTime</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">ftLastWriteTime</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">OSPrintLastError</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">FileTime</span><span class="p">)</span><span class="n">lastWriteTime</span><span class="p">.</span><span class="n">dwHighDateTime</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">DWORD</span><span class="p">)</span><span class="o">|</span><span class="n">lastWriteTime</span><span class="p">.</span><span class="n">dwLowDateTime</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Why not use <code>GetFileTime</code>?</p>
+<p>For those of you more familiar with the Win32 API, you might have noticed
+the existence of a <code>GetFileTime</code> function that seems to do the same thing
+we do here, except with less typing. The reason we don't use it is that it
+requires a handle to the file, while <code>GetFileAttributesEx</code> does not.</p>
+</div>
+<p>The <code>FILETIME</code> structure on Windows is essentially two 32-bit integers smushed
+together, so we do some work to cast it to a single 64-bit value instead. For
+platform compatbility's sake, we call that a <code>FileTime</code> data type of our own.</p>
+<p>On Windows, <code>OSPrintLastError</code> looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">OSPrintLastError</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">errMsg</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="n">DWORD</span> <span class="n">errCode</span> <span class="o">=</span> <span class="n">GetLastError</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">errCode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">FormatMessageA</span><span class="p">(</span><span class="n">FORMAT_MESSAGE_FROM_SYSTEM</span><span class="o">|</span><span class="n">FORMAT_MESSAGE_IGNORE_INSERTS</span><span class="p">,</span>
+                   <span class="nb">NULL</span><span class="p">,</span>
+                   <span class="n">errCode</span><span class="p">,</span>
+                   <span class="n">MAKELANGID</span><span class="p">(</span><span class="n">LANG_NEUTRAL</span><span class="p">,</span> <span class="n">SUBLANG_DEFAULT</span><span class="p">),</span>
+                   <span class="p">(</span><span class="n">LPTSTR</span><span class="p">)</span><span class="n">errMsg</span><span class="p">,</span>
+                   <span class="k">sizeof</span><span class="p">(</span><span class="n">errMsg</span><span class="p">),</span>
+                   <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="n">perror</span><span class="p">(</span><span class="n">errMsg</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>(Yes, it's kind of a little silly how much you need to type to actually print a
+system exception string.)</p>
+<p>On Windows, each tick is a 100-nanosecond interval, which is significantly more
+granular than Linux's default legacy behaviour, which measures in 1-second
+intervals. Windows also starts its measurement from a different <strong>epoch</strong> than
+Linux; Windows uses <code>1601-01-01T00:00:00Z</code> as its start date, while Linux uses
+<code>1970-01-01T00:00:00Z</code> instead. This means that it's useful to define some
+constants/functions for converting between the two:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#define WINDOWS_TICK 10000000 </span><span class="c1">// NOTE: (sonictk) Windows uses 100ns intervals</span>
+<span class="cp">#define SEC_TO_UNIX_EPOCH 11644473600LL</span>
+
+<span class="kr">inline</span> <span class="n">uint</span> <span class="nf">win32TicksToUnixSeconds</span><span class="p">(</span><span class="n">dlong</span> <span class="n">win32Ticks</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">uint</span><span class="p">)((</span><span class="n">win32Ticks</span> <span class="o">/</span> <span class="n">WINDOWS_TICK</span><span class="p">)</span> <span class="o">-</span> <span class="n">SEC_TO_UNIX_EPOCH</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="kr">inline</span> <span class="n">dlong</span> <span class="nf">unixSecondsToWin32Ticks</span><span class="p">(</span><span class="n">uint</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dlong</span><span class="p">)((</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">SEC_TO_UNIX_EPOCH</span><span class="p">)</span> <span class="o">*</span> <span class="n">WINDOWS_TICK</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kr">inline</span> <span class="n">dlong</span> <span class="nf">unixSecondsToWin32Ticks</span><span class="p">(</span><span class="n">timet</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">unixSecondsToWin32Ticks</span><span class="p">((</span><span class="n">uint</span><span class="p">)</span><span class="n">seconds</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>Why do we favour the Windows implementation when it comes to file times?
+Well, the Linux one suffers from
+the <a href="https://en.wikipedia.org/wiki/Year_2038_problem"><strong>Year 2038</strong> issue</a>
+due to its use of a single signed 32-bit integer, unlike Windows. This is
+rectified in newer versions of the kernel, but for backwards compatibility
+reasons, any code that relies on the legacy behaviour will fail to work in
+the future.</p>
+</div>
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<p>With that out of the way, the Linux implementation will look similar to the following:</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">OSPrintLastError</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+<span class="p">}</span>
+
+
+<span class="kr">inline</span> <span class="n">FileTime</span> <span class="nf">getLastWriteTime</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">FileTime</span> <span class="n">result</span><span class="p">;</span>
+
+    <span class="k">struct</span> <span class="n">stat</span> <span class="n">attrib</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kt">int</span> <span class="n">statResult</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attrib</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">statResult</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">OSPrintLastError</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">timet</span> <span class="n">mtime</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">.</span><span class="n">st_mtim</span><span class="p">.</span><span class="n">tv_sec</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">FileTime</span><span class="p">)(</span><span class="n">unixSecondsToWin32Ticks</span><span class="p">(</span><span class="n">mtime</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Instead of <code>GetFileAttributesEx</code>, which is a Windows-specific function, we
+make use of <a href="https://linux.die.net/man/2/stat"><code>stat</code></a> instead to get
+ourselves a <code>time_t</code> structure that we can then extract the <code>st_mtim</code> field
+from, which is the last modified time.</p>
+<p>Ok, we can now get file times of modified files on disk through code. Let's take
+a look at what those mysterious <code>loadSharedLibrary</code> and <code>loadSymbolFromLibrary</code>
+functions do next.</p>
+<h2 id="loading-a-shared-library">Loading a shared library<a class="headerlink" href="#loading-a-shared-library" title="Permanent link">&para;</a></h2>
+<h3 id="windows_1">Windows<a class="headerlink" href="#windows_1" title="Permanent link">&para;</a></h3>
+<p>On Windows, we load a shared libary using the function call <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684175(v=vs.85).aspx"><code>LoadLibrary</code></a>,
+funnily enough! This makes implementation fairly trivial:</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="n">DLLHandle</span> <span class="nf">loadSharedLibrary</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DLLHandle</span> <span class="n">libHandle</span> <span class="o">=</span> <span class="n">LoadLibrary</span><span class="p">((</span><span class="n">LPCTSTR</span><span class="p">)</span><span class="n">filename</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">libHandle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">OSPrintLastError</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">libHandle</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Let's do the unload equivalent as well using another function called
+<code>FreeLibrary</code>, which unloads the DLL from memory.</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="kt">int</span> <span class="nf">unloadSharedLibrary</span><span class="p">(</span><span class="n">DLLHandle</span> <span class="n">handle</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;The handle is not valid! Cannot unload!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">BOOL</span> <span class="n">result</span> <span class="o">=</span> <span class="n">FreeLibrary</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">OSPrintLastError</span><span class="p">();</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now that we can load a DLL into memory, we need a way to inspect that DLL and
+find the address of a given symbol that we're interested in (like <code>getValue</code>!)
+Let's see what that looks like in code:</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="n">FuncPtr</span> <span class="nf">loadSymbolFromLibrary</span><span class="p">(</span><span class="n">DLLHandle</span> <span class="n">handle</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">symbol</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">FuncPtr</span> <span class="n">symbolAddr</span> <span class="o">=</span> <span class="n">GetProcAddress</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="p">(</span><span class="n">LPCSTR</span><span class="p">)</span><span class="n">symbol</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">symbolAddr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">OSPrintLastError</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">symbolAddr</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We use the
+function
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms683212%28v=vs.85%29.aspx?f=255&amp;MSPPError=-2147217396"><code>GetProcAddress</code></a>
+in order to perform run-time dynamic linking, getting the address of the symbol
+that we're interested in. Thankfully, this entire process is fairly straightforward.</p>
+<h3 id="linux_1">Linux<a class="headerlink" href="#linux_1" title="Permanent link">&para;</a></h3>
+<p>On Linux, the process is very similar, except we use <code>dlopen</code> and <code>dlclose</code>
+instead for our OS library calls:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;dlfcn.h&gt;</span><span class="cp"></span>
+
+<span class="kr">inline</span> <span class="n">DLLHandle</span> <span class="nf">loadSharedLibrary</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DLLHandle</span> <span class="n">libHandle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">flags</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">libHandle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">errMsg</span> <span class="o">=</span> <span class="n">dlerror</span><span class="p">();</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Failed to load library %s: %s!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">errMsg</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">libHandle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">inline</span> <span class="n">DLLHandle</span> <span class="nf">loadSharedLibrary</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DLLHandle</span> <span class="n">libHandle</span> <span class="o">=</span> <span class="n">loadSharedLibrary</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">RTLD_LAZY</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">libHandle</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">unloadSharedLibrary</span><span class="p">(</span><span class="n">DLLHandle</span> <span class="n">handle</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;The handle is not valid! Cannot unload!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">dlclose</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">errMsg</span> <span class="o">=</span> <span class="n">dlerror</span><span class="p">();</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Could not free library! %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">errMsg</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We specify the <code>RTLD_LAZY</code> flag when loading our <code>.so</code> since we only want to
+resolve our <code>getValue</code> symbol when code that references it is executed; if no
+code ever references it, well, why would we want to waste time performing the
+binding of symbols otherwise?</p>
+<p>When it comes to loading symbols at run-time, <code>dlsym()</code> is our function of
+choice, however, Linux is slightly more obtuse when it comes to error-checking:</p>
+<div class="codehilite"><pre><span></span><span class="kr">inline</span> <span class="n">FuncPtr</span> <span class="nf">loadSymbolFromLibrary</span><span class="p">(</span><span class="n">DLLHandle</span> <span class="n">handle</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">symbol</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;The given handle was not valid!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="o">*</span><span class="n">symbolAddr</span> <span class="o">=</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">symbol</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">symbolAddr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dlerror</span><span class="p">();</span>
+        <span class="n">dlsym</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">symbol</span><span class="p">);</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">errMsg</span> <span class="o">=</span> <span class="n">dlerror</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">errMsg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">symbolAddr</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Unable to find symbol: %s! %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">errMsg</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">symbolAddr</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Basically, if the returned address was <code>NULL</code>, we clear the global status
+code, call the <code>dlsym</code> function again, and check what the message is, since
+the returned symbol might legimately <em>be</em> a null pointer.</p>
+<h2 id="putting-things-together">Putting things together<a class="headerlink" href="#putting-things-together" title="Permanent link">&para;</a></h2>
+<p>So we've now got our <code>loadDeformerLogicDLL</code> sorted out, let's write the
+symmetric <code>unloadDeformerLogicDLL</code> version:</p>
+<div class="codehilite"><pre><span></span><span class="n">LibraryStatus</span> <span class="nf">unloadDeformerLogicDLL</span><span class="p">(</span><span class="n">DeformerLogicLibrary</span> <span class="o">&amp;</span><span class="n">library</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">isValid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">LibraryStatus_InvalidHandle</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">unload</span> <span class="o">=</span> <span class="n">unloadSharedLibrary</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">handle</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">unload</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MGlobal</span><span class="o">::</span><span class="n">displayError</span><span class="p">(</span><span class="s">&quot;Unable to unload shared library!&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">LibraryStatus_UnloadFailure</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">library</span><span class="p">.</span><span class="n">deformCB</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">library</span><span class="p">.</span><span class="n">lastModified</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">library</span><span class="p">.</span><span class="n">isValid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">LibraryStatus_Success</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Basically, we check if the library given is valid, and unload it, thereafter
+clearing it out and re-initializing it to default values.</p>
+<p>We can now update the main <code>deform()</code> function to reload the DLL every time it
+changes:</p>
+<div class="codehilite"><pre><span></span><span class="n">MStatus</span> <span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">deform</span><span class="p">(</span><span class="n">MDataBlock</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">,</span>
+                                      <span class="n">MItGeometry</span> <span class="o">&amp;</span><span class="n">iter</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="n">MMatrix</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span>
+                                      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">multiIndex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LibraryStatus</span> <span class="n">status</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">isValid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unloadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">loadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="n">LibraryStatus_Success</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">kPluginLogicLibraryPath</span><span class="p">.</span><span class="n">numChars</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">FileTime</span> <span class="n">lastModified</span> <span class="o">=</span> <span class="n">getLastWriteTime</span><span class="p">(</span><span class="n">kPluginLogicLibraryPath</span><span class="p">.</span><span class="n">asChar</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">lastModified</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">lastModified</span> <span class="o">!=</span> <span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">lastModified</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">unloadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="n">LibraryStatus_Success</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">loadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="n">LibraryStatus_Success</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">MStatus</span> <span class="n">result</span><span class="p">;</span>
+
+    <span class="n">MDataHandle</span> <span class="n">envelopeHandle</span> <span class="o">=</span> <span class="n">block</span><span class="p">.</span><span class="n">inputValue</span><span class="p">(</span><span class="n">envelope</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+    <span class="kt">float</span> <span class="n">envelope</span> <span class="o">=</span> <span class="n">envelopeHandle</span><span class="p">.</span><span class="n">asFloat</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="n">iter</span><span class="p">.</span><span class="n">isDone</span><span class="p">();</span> <span class="n">iter</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+    <span class="p">{</span>
+
+        <span class="n">MPoint</span> <span class="n">curPtPosPt</span> <span class="o">=</span> <span class="n">iter</span><span class="p">.</span><span class="n">position</span><span class="p">();</span>
+        <span class="n">MPoint</span> <span class="n">finalPosPt</span> <span class="o">=</span> <span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">deformCB</span><span class="p">(</span><span class="n">curPtPos</span><span class="p">,</span> <span class="n">envelope</span><span class="p">);</span>
+
+        <span class="n">iter</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">finalPosPt</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Things might make more sense now. We check the last modified timestamp of the
+current DLL file on disk and if it is newer than the one we have loaded in
+memory, we unload the current one and load the new one instead. We modify the
+deformation function to call our function pointer that we fixed up in the
+<code>loadDeformerLogicDLL</code> function as well.</p>
+<p>We're almost done, but we've got some unfinished business to attend to in both
+our plugin entry/exit points:</p>
+<div class="codehilite"><pre><span></span><span class="n">MStatus</span> <span class="nf">initializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MStatus</span> <span class="n">status</span><span class="p">;</span>
+    <span class="n">MFnPlugin</span> <span class="n">plugin</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">kAUTHOR</span><span class="p">,</span> <span class="n">kVERSION</span><span class="p">,</span> <span class="n">kREQUIRED_API_VERSION</span><span class="p">);</span>
+
+    <span class="n">MString</span> <span class="n">pluginPath</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">loadPath</span><span class="p">();</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pluginPathC</span> <span class="o">=</span> <span class="n">pluginPath</span><span class="p">.</span><span class="n">asChar</span><span class="p">();</span>
+    <span class="k">const</span> <span class="n">sizet</span> <span class="n">lenPluginPath</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">pluginPathC</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">OSPluginPath</span><span class="p">[</span><span class="n">kMaxPathLen</span><span class="p">];</span>
+    <span class="n">strncpy</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">,</span> <span class="n">pluginPathC</span><span class="p">,</span> <span class="n">lenPluginPath</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">replaced</span> <span class="o">=</span> <span class="n">convertPathSeparatorsToOSNative</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">replaced</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">MStatus</span><span class="o">::</span><span class="n">kFailure</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">kPluginLogicLibraryPath</span> <span class="o">=</span> <span class="n">getDeformerLogicLibraryPath</span><span class="p">(</span><span class="n">OSPluginPath</span><span class="p">);</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">registerNode</span><span class="p">(</span><span class="n">kHotReloadableDeformerName</span><span class="p">,</span>
+                                 <span class="n">kHotReloadableDeformerID</span><span class="p">,</span>
+                                 <span class="o">&amp;</span><span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">creator</span><span class="p">,</span>
+                                 <span class="o">&amp;</span><span class="n">HotReloadableDeformer</span><span class="o">::</span><span class="n">initialize</span><span class="p">,</span>
+                                 <span class="n">MPxNode</span><span class="o">::</span><span class="n">kGeometryFilter</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">MStatus</span> <span class="nf">uninitializePlugin</span><span class="p">(</span><span class="n">MObject</span> <span class="n">obj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MFnPlugin</span> <span class="n">plugin</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+    <span class="n">MStatus</span> <span class="n">status</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">isValid</span> <span class="o">&amp;&amp;</span> <span class="n">kLogicLibrary</span><span class="p">.</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unloadDeformerLogicDLL</span><span class="p">(</span><span class="n">kLogicLibrary</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">status</span> <span class="o">=</span>  <span class="n">plugin</span><span class="p">.</span><span class="n">deregisterNode</span><span class="p">(</span><span class="n">kHotReloadableDeformerID</span><span class="p">);</span>
+    <span class="n">CHECK_MSTATUS_AND_RETURN_IT</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Basically, we get the path to the <code>logic.dll</code> and store it as a global
+variable when our plugin is loaded (so we don't need to keep computing it each
+time in the <code>deform</code> function), and unload it when the plugin is unloaded.</p>
+<p>At this point, our high-level implementation is complete. You can go ahead and
+load the plugin, change the <code>logic.cpp</code> file and try to re-complile (and if
+you're on Linux, things will probably work!) However, as they say, the devil is
+in the details, and there are two Windows-specific issues that we need to deal
+with before we can reach a true hot-reloadable workflow.</p>
+<h2 id="dealing-with-windows">Dealing with Windows<a class="headerlink" href="#dealing-with-windows" title="Permanent link">&para;</a></h2>
+<h3 id="dll-file-handle-lock">DLL file handle lock<a class="headerlink" href="#dll-file-handle-lock" title="Permanent link">&para;</a></h3>
+<p>You might have noticed the following error message in your build output when you
+tried to run the <code>build.bat</code> script while the plugin was loaded in Maya:</p>
+<div class="codehilite"><pre><span></span>Compiling Logic...
+logic.cpp
+Linking Logic...
+LINK : fatal error LNK1104: cannot open file &#39;C:\Users\sonictk\Git\experiments\maya_hot_reload_example\msbuild\logic.dll
+</pre></div>
+
+
+<p>Uh-oh. Why is the linker complaining that it cannot open the business logic DLL?</p>
+<p>Basically, when we called <code>LoadLibrary</code> earlier, Windows will <em>helpfully</em> lock
+the file handle to it until it detects that there are no references left to it,
+either through the use of <code>FreeLibrary</code> calls (or all applications that
+reference it have crashed!) or otherwise. What this means is that while the DLL
+is in use, we can't overwrite it in-place.</p>
+<p>However...renaming a DLL file while it's in use does not invalidate the file
+handle to it. Thus:</p>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="k">exist</span> <span class="nv">%OutputLogicDLLFilename%</span> <span class="p">(</span><span class="k">rename</span> <span class="nv">%OutputLogicDLLFilename%</span> <span class="nv">%OutputLogicDLLTempFilename%</span><span class="p">)</span>
+
+<span class="c1">REM after compilation and everything...</span>
+
+timeout /t 1 <span class="p">&gt;</span> NUL
+
+<span class="k">echo</span> Deleting temporary artifacts...
+<span class="k">if</span> <span class="k">exist</span> <span class="nv">%OutputLogicDLLTempFilename%</span> <span class="k">del</span> <span class="nv">%OutputLogicDLLTempFilename%</span>
+</pre></div>
+
+
+<p>We put a artificial wait time of 1 second to give Maya enough time to load the
+new library before deleting the old one; unlike renaming, deleting a DLL while
+it's in use basically means undefined behaviour the next time an app requests
+memory to/from it, and almost always results in a crash.</p>
+<p>You can try now; things work as expected; we're able to modify <code>logic.cpp</code>,
+re-run the build script, and watch the deformer update in real-time as the
+<code>deform</code> function loads the new version of our library!</p>
+<div class="admonition tip">
+<p class="admonition-title">Crossing the platforms</p>
+<p>Why doesn't this problem occur on Linux? Basically, on Linux, when <code>.so</code>s
+are loaded into memory, we are able to overwrite the original file handle
+since the mechanisms for reference counting work a little differently: the
+<em>directory entry</em> for the file gets removed, but any exsting processes that
+use the file <em>still have access to the file itself</em>. Only when the reference
+count reaches zero does the file finally get deleted automatically by the
+OS. Linux does actually lock something called
+the <a href="https://en.wikipedia.org/wiki/Inode">inode</a>, which remains untouched,
+since all we deleted was merely the link to it.</p>
+</div>
+<h3 id="pdb-lock">PDB lock<a class="headerlink" href="#pdb-lock" title="Permanent link">&para;</a></h3>
+<p>One other problem is the issue of <strong>PDB lock</strong>; if we launched Maya under the
+control of the Visual Studio debugger, or attached the debugger to Visual Studio
+while we were working with our plugin, we might get an error during compilation
+where the PDB file instead is the one being locked. What's happening is that
+Visual Studio will automatically lock any PDBs that are loaded during a
+debugging session and <em>will keep them locked indefinitely until the end of the
+debugging session</em>. (This lock will persist even if you unload the DLL) This
+<a href="http://ourmachinery.com/post/little-machines-working-together-part-2/">post</a>
+here details some possible solutions to this issue; we'll be making use of the
+third one, which is to generate a random filename for the PDB file:</p>
+<div class="codehilite"><pre><span></span><span class="k">set</span> <span class="nv">CommonLinkerFlagsLogic</span><span class="p">=</span>/PDB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic_</span><span class="nv">%random%</span><span class="s2">.pdb&quot;</span> /IMPLIB:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic.lib&quot;</span> /OUT:<span class="s2">&quot;</span><span class="nv">%BuildDir%</span><span class="s2">\logic.dll&quot;</span> <span class="nv">%BuildDir%</span>\logic.obj
+</pre></div>
+
+
+<p>The <code>%random%</code> macro on Windows will generate a random string of numbers for
+us, which will then be used in the resulting PDB's filename. What happens here
+is that the <code>logic.dll</code> will now have the path to this new <code>.pdb</code> "baked"
+inside its debug section; the Visual Studio debugger will lock that file when a
+debugging session is initiated. When we re-compile the PDB file, we generate a
+new one and point to that one instead in the DLL, thus repeating the process
+and allowing us to get past the PDB lock.</p>
+<div class="admonition note">
+<p class="admonition-title">How the debugger finds <code>.pdb</code> files</p>
+<p>I recommend reading up on how the Visual Studio
+debugger
+<a href="https://msdn.microsoft.com/en-us/library/ms241613.aspx">finds <code>.pdb</code> files</a>
+in order to get a better understanding of the behaviour that's happening. Of
+course, keep in mind that this is Windows-specific; neither <code>gdb</code> nor
+XCode exhibit this behaviour.</p>
+</div>
+<h2 id="is-it-working">Is it working?<a class="headerlink" href="#is-it-working" title="Permanent link">&para;</a></h2>
+<p>If you managed to get past all that, congratulations! You should be able to have
+hot-reloadable code working in your Maya deformer! If you're stuck somewhere,
+take a look at the repository's code to see where you might have gone a bit
+off-base. (be warned, however, that the code there is organized a little bit
+differently from what you might have seen in this tutorial)</p>
+<p>Good luck, and I hope you've found this technique interesting (and perhaps useful)!</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../getting_somewhere/" title="Getting Somewhere" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Getting Somewhere
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../demo/" title="Demonstration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Demonstration
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/sonictk" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/ylsiew" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/sonictk" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.6cdc17f0.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
